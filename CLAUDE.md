@@ -5,7 +5,7 @@
 ## Vaults
 
 - `embedded/` — 嵌入式知识库 Vault
-- `software/` — 软件知识库 Vault
+- `software/` — 软件知识库 Vault（已激活，正在进行 Linux 存储 I/O 学习）
 
 ## 当前工作 Vault
 
