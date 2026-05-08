@@ -28,9 +28,9 @@ Cortex-M 是 ARM 的微控制器处理器系列，基于 ARMv7-M 架构（32-bit
 
 ## 与 Cortex-A 的核心区别
 
-- **无 MMU** — 无虚拟内存，不能跑完整 OS（Linux/Android）
-- **Thumb-2 only** — 无 ARM 模式，代码密度高
-- **NVIC 集成** — 中断控制器直接集成在核心内，不像 A 系列用独立 GIC
+- **无 MMU** — 无虚拟内存，不能跑完整 OS（Linux/Android），详见 [[MMU 与虚拟内存]]
+- **Thumb-2 only** — 无 ARM 模式，代码密度高，见 [[ARM 指令集体系]]
+- **[[NVIC|NVIC 集成]]** — 中断控制器直接集成在核心内，不像 A 系列用独立 GIC
 - **低功耗** — 设计目标就是低功耗微控制器场景
 - **确定性** — 中断延迟确定，无 cache miss 不确定因素
 

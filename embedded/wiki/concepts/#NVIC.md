@@ -9,7 +9,7 @@ tags: [arm, cortex-m, interrupt, nvic, mcu]
 
 ## 概述
 
-NVIC（Nested Vectored Interrupt Controller）是 ARM Cortex-M 架构的核心组成部分，**直接集成在处理器内核中**，与 Cortex-A 系列的独立 GIC 形成鲜明对比。
+NVIC（Nested Vectored Interrupt Controller）是 ARM Cortex-M 架构的核心组成部分，**直接集成在处理器内核中**，与 Cortex-A 系列的独立 GIC 形成鲜明对比。详见 [[Cortex-A 与 Cortex-M 对比]]。
 
 ## 核心特性
 

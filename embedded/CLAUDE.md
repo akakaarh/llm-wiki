@@ -4,6 +4,12 @@
 
 嵌入式开发知识库。原始文档包括芯片手册、RTOS 文档、通信协议规范、硬件调试笔记等。
 
+## 学习进度
+
+进度文件：`wiki/progress/README.md`
+
+**每次新 session 开始时，第一件事是读取 `wiki/progress/README.md` 恢复进度。**
+
 ## 目录
 
 - `raw/` — 原始文档（PDF、Markdown、网页剪藏）
@@ -13,6 +19,8 @@
 
 | 分类 | 说明 |
 |------|------|
+| `progress/` | 学习进度追踪（每次新 session 优先读） |
+| `notes/` | 学习笔记 |
 | `entities/` | 硬件型号、驱动模块、调试工具 |
 | `concepts/` | DMA、中断、状态机、总线协议 |
 | `sources/` | 文档摘要 |
@@ -45,7 +53,8 @@
    - 通用原理/概念 → `concepts/#<concept>.md`
    - 具体型号/工具/外设 → `entities/@<entity>.md`
    - 跨文档对比/综合分析 → `synthesis/!<topic>.md`
-5. 追加 `wiki/log.md`
+5. **交叉引用**：在页面正文中提到其他 wiki 页面时，使用 `[[页面名]]` 或 `[[页面名|显示文字]]` 添加 wikilink
+6. 追加 `wiki/log.md`
 
 ### Query
 
@@ -55,7 +64,16 @@
 
 ### Lint
 
-每周末检查：矛盾、过时、orphan 页面、缺失交叉引用。
+运行 `python scripts/lint.py <vault_path>` 检查健康状态，加 `--fix` 自动修复机械问题。
+
+检查项：断链 wikilinks、孤立页面、缺失 frontmatter、过期 index。
+
+### 学习流程
+
+1. **新 session** → 读取 `wiki/progress/README.md` 恢复进度
+2. 按当前阶段继续学习
+3. 用户说"记录" → 更新进度文件 + git commit
+4. 用户说"新话题" → 开启新阶段，更新 README
 
 ## 页面职责边界
 

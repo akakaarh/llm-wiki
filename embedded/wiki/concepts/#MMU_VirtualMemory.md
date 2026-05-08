@@ -9,7 +9,7 @@ tags: [arm, mmu, virtual-memory, page-table, memory-management]
 
 ## 概述
 
-MMU（Memory Management Unit）在 ARM Cortex-A 中负责虚拟地址（VA）到物理地址（PA）的转换，支持基于页表的内存保护。
+MMU（Memory Management Unit）在 ARM Cortex-A 中负责虚拟地址（VA）到物理地址（PA）的转换，支持基于页表的内存保护。与 Cortex-M 的 [[MPU — 内存保护单元（Cortex-M）|MPU]] 形成对比。
 
 ## 页表结构（ARMv7-A）
 

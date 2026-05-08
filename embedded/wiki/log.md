@@ -24,3 +24,12 @@
 - 新建 # 概念：#NVIC.md、#MPU_CortexM.md
 - 新建 ! 综合：!CortexA_vs_CortexM.md（ARMv7-A vs ARMv7-M 全方位对比）
 - 更新 index.md
+
+## [2026-05-08] init | 创建嵌入式学习路线
+
+- 新建 `wiki/progress/README.md`：完整 6 阶段学习路线（嵌入式基础 → ARM架构 → Cortex-M深入 → 外设驱动 → RTOS → Cortex-A/Linux BSP）
+- 新建 `wiki/notes/` 目录
+- 更新 `CLAUDE.md`：添加 progress/notes 分类 + 学习流程工作流
+- 更新 `index.md`：添加学习进度和学习笔记分类
+- 整合已有 13 个 wiki 页面到学习路线中
+- 预计新增 31 个 wiki 页面

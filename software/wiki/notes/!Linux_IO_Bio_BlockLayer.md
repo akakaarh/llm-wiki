@@ -1,3 +1,8 @@
+---
+type: note
+tags: [linux, storage, block-layer, bio, kernel, io]
+---
+
 # Linux 存储 I/O 路径：bio 与 Block Layer
 
 > 学习日期：2026-04-24

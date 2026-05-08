@@ -18,7 +18,7 @@ tags: [arm, cortex-a, cortex-m, comparison, embedded, application]
 | 典型功耗 | 0.5W ~ 10W+ | 10μW ~ 500mW |
 | 支持 OS | Linux/Android/iOS | RTOS / Bare-metal |
 | 虚拟内存 | MMU | 无（MPU 可选） |
-| 指令集 | ARM + Thumb + Thumb-2 | 仅 Thumb/Thumb-2 |
+| 指令集 | ARM + Thumb + Thumb-2 | 仅 [[ARM 指令集体系|Thumb/Thumb-2]] |
 | 适用场景 | 手机/平板/PC/服务器 | 单片机/嵌入式/IoT/工业控制 |
 
 ## 详细对比
@@ -26,12 +26,12 @@ tags: [arm, cortex-a, cortex-m, comparison, embedded, application]
 ### 中断系统
 
 - **Cortex-A** — 独立 GIC（Generic Interrupt Controller），支持 SPI/PPI/SGI，配置复杂，支持多核中断路由，安全状态（TrustZone）集成
-- **Cortex-M** — NVIC 集成在内核，硬件嵌套，无需软件模拟，配置简单，向量化中断
+- **Cortex-M** — [[NVIC]] 集成在内核，硬件嵌套，无需软件模拟，配置简单，向量化中断
 
 ### 内存管理
 
-- **Cortex-A** — MMU 支持完整虚拟内存，页表 4KB ~ 2MB/16MB，地址空间 4GB（32-bit）或 48-bit（64-bit）
-- **Cortex-M** — 无 MMU，固定 4GB 线性地址空间，MPU 可选（区域保护，无虚拟内存）
+- **Cortex-A** — [[MMU 与虚拟内存|MMU]] 支持完整虚拟内存，页表 4KB ~ 2MB/16MB，地址空间 4GB（32-bit）或 48-bit（64-bit）
+- **Cortex-M** — 无 MMU，固定 4GB 线性地址空间，[[MPU — 内存保护单元（Cortex-M）|MPU]] 可选（区域保护，无虚拟内存）
 
 ### 功耗与成本
 

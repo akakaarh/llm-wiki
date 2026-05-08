@@ -9,7 +9,7 @@ tags: [arm, cortex-m, mpu, memory-protection, embedded]
 
 ## 概述
 
-MPU（Memory Protection Unit）是 Cortex-M3/M4/M7 中的可选内存保护硬件，位于 CPU 与总线之间，对内存访问进行权限检查。相比 Cortex-A 的 MMU，MPU 更简单，不支持虚拟地址映射，仅支持基于物理地址的区域保护。
+MPU（Memory Protection Unit）是 Cortex-M3/M4/M7 中的可选内存保护硬件，位于 CPU 与总线之间，对内存访问进行权限检查。相比 Cortex-A 的 [[MMU 与虚拟内存|MMU]]，MPU 更简单，不支持虚拟地址映射，仅支持基于物理地址的区域保护。
 
 ## 与 MMU 的对比
 

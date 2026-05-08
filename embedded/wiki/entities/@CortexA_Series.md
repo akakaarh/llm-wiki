@@ -29,10 +29,10 @@ Cortex-A 是 ARM 的应用处理器系列，基于 ARMv7-A 架构（部分型号
 ## 共同特性
 
 所有 Cortex-A 处理器均支持：
-- ARM/Thumb/Thumb-2 指令集
+- [[ARM 指令集体系|ARM/Thumb/Thumb-2 指令集]]
 - 硬件浮点（VFPv3）
 - NEON SIMD（部分型号）
-- MMU + TrustZone
+- [[MMU 与虚拟内存|MMU]] + TrustZone
 - 多级 Cache
 - 中断控制器（GIC）
 - 多核（SMP，部分型号）

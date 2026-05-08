@@ -9,7 +9,7 @@ tags: [arm, processor-mode, cpsr, registers]
 
 ## 概述
 
-ARM Cortex-A 处理器支持 7 种特权模式，定义在 ARMv7-A 架构中。每种模式有独立的寄存器 banked 副本。
+ARM Cortex-A 处理器支持 7 种特权模式，定义在 ARMv7-A 架构中。每种模式有独立的寄存器 banked 副本。与 [[NVIC|Cortex-M 的 NVIC 中断模型]] 不同，Cortex-A 使用独立的 GIC 处理中断。详见 [[Cortex-A 系列]]。
 
 ## 模式列表
 

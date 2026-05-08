@@ -51,11 +51,14 @@
 2. 写 `$<title>.md` 来源摘要
 3. 更新 `wiki/index.md`
 4. 新建/更新相关 `entities/` 或 `concepts/` 页面
-5. 追加 `wiki/log.md`
+5. **交叉引用**：在页面正文中提到其他 wiki 页面时，使用 `[[页面名]]` 或 `[[页面名|显示文字]]` 添加 wikilink
+6. 追加 `wiki/log.md`
 
 ### Lint
 
-每周末检查：矛盾、过时、orphan 页面、缺失交叉引用。
+运行 `python scripts/lint.py <vault_path>` 检查健康状态，加 `--fix` 自动修复机械问题。
+
+检查项：断链 wikilinks、孤立页面、缺失 frontmatter、过期 index。
 
 ## 标签体系（示例）
 

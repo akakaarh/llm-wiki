@@ -2,6 +2,14 @@
 
 > 此文件由 LLM 自动维护，不要手动编辑。
 
+## 学习进度
+
+- [README.md](progress/README.md) — 嵌入式系统学习路线与进度追踪（6阶段24节）
+
+## 学习笔记
+
+暂无内容。
+
 ## 来源摘要 ($)
 
 - [$CortexA_ProgrammersGuide.md](sources/$CortexA_ProgrammersGuide.md) — ARM Cortex-A 系列程序员指南 DEN0013D，涵盖处理器模式、指令集、Cache、MMU、TrustZone、NEON
@@ -30,4 +38,4 @@
 
 ---
 
-最后更新：2026-04-22
+最后更新：2026-05-08
