@@ -45,8 +45,8 @@ python scripts/graph.py embedded --format json
 
 ### 软件：Linux 存储 I/O
 
-- **上次：** 阶段 2-2 mq-deadline 调度器（4 队列、防饿死、读写分离）
-- **下次：** 阶段 2-3 BFQ 调度器
+- **上次：** 阶段 2-4 kyber 调度器（令牌桶限流、NVMe/UFS/eMMC 接口协议与颗粒类型）
+- **下次：** 阶段 2-5 多队列架构（software queue / hardware queue 映射）
 
 ### 嵌入式
 

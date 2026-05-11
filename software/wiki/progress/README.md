@@ -8,7 +8,7 @@
 ## 当前阶段
 
 **阶段 2：request 在 scheduler 的生命周期**
-状态：进行中 — 第2节 mq-deadline 已完成，待继续 BFQ
+状态：进行中 — mq-deadline/BFQ/kyber 已完成，待继续多队列架构
 
 ---
 
@@ -84,8 +84,9 @@ struct deadline_data {
 - [x] bio → request 转换（block 内部机制，黑箱）
 - [x] completion 后数据回拷路径（copy 发生在哪一层）
 - [x] dispatch 单位确认（request，不是 bio）
-- [ ] BFQ 调度器原理
-- [ ] kyber 调度器原理
+- [x] mq-deadline 调度器原理
+- [x] BFQ 调度器原理
+- [x] kyber 调度器原理
 - [ ] 多队列架构细节（software queue / hardware queue 映射）
 
 ---
@@ -99,4 +100,6 @@ struct deadline_data {
 | 2026-04-28 | 阶段1-第3节 | completion 路径：buffered I/O 在 filemap_read 内部 copy_page_to_iter、DIO 用 DMA 直达用户 buffer 不需要回拷、等待机制（wait queue 睡眠等 wake_up） |
 | 2026-04-29 | 阶段2-第1节 | elevator scheduler（排序/合并/防饿死）、dispatch 流程（elevator 取最优 request 直接 pop 不扫描）、plug 机制（攒多个 bio 批量 unplug dispatch）、unplug 时机（进程 sleep、plug 满、时间到期）、per-task_struct plug 模型、request 派发到 NVMe 硬件（SQ/CQ/tag/CQE/doorbell）、硬中断完成路径、end_io 回调区分（buffered unlock_page vs DIO ki_complete） |
 | 2026-05-06 | 回顾自测 | 系统回顾阶段1全部+阶段2第1节，纠正 tag 功能优先级（流控>路由）、确认 DIO 无 copy_to_user、明确学习策略：重架构轻函数链 |
-| 2026-05-10 | 阶段2-第2节 | mq-deadline 调度器：设计目标（防饿死+读写分离）、4个队列结构（2×2：读/写 × 扇区排序/deadline排序）、红黑树+链表数据结构、dispatch 优先级（读FIFO超时→写FIFO超时→读next_rq→写next_rq）、关键参数（read_expire=500ms/write_expire=5000ms/fifo_batch=16/writes_starved=2）、防饿死机制（连续被抢占N次后提升优先级）、bio与request关系确认（dispatch单位是request，bio是文件系统提交的"原料"，block层转换为request后调度） |
+| 2026-05-10 | 阶段2-第2节 | mq-deadline 调度器：4个队列结构、dispatch 优先级、防饿死机制、bio与request关系确认 |
+| 2026-05-11 | 阶段2-第3节 | BFQ 调度器：按进程公平分配带宽、budget 预算机制、虚拟时间调度、weight 权重与带宽分配 |
+| 2026-05-11 | 阶段2-第4节 | kyber 调度器：令牌桶限流、低延迟优先、NVMe/UFS/eMMC 接口协议与颗粒类型 |
