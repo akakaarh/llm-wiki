@@ -45,8 +45,8 @@ python scripts/graph.py embedded --format json
 
 ### 软件：Linux 存储 I/O
 
-- **上次：** 阶段 2-4 kyber 调度器（令牌桶限流、NVMe/UFS/eMMC 接口协议与颗粒类型）
-- **下次：** 阶段 2-5 多队列架构（software queue / hardware queue 映射）
+- **上次：** 阶段 2-5 多队列架构（ctx/hctx 映射、tag、竞争解决）
+- **下次：** 阶段 2 完成，待规划阶段 3
 
 ### 嵌入式
 

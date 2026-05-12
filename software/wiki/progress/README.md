@@ -8,7 +8,7 @@
 ## 当前阶段
 
 **阶段 2：request 在 scheduler 的生命周期**
-状态：进行中 — mq-deadline/BFQ/kyber 已完成，待继续多队列架构
+状态：已完成 — mq-deadline/BFQ/kyber/多队列架构全部完成
 
 ---
 
@@ -87,7 +87,7 @@ struct deadline_data {
 - [x] mq-deadline 调度器原理
 - [x] BFQ 调度器原理
 - [x] kyber 调度器原理
-- [ ] 多队列架构细节（software queue / hardware queue 映射）
+- [x] 多队列架构细节（ctx/hctx 映射、tag、竞争解决）
 
 ---
 
@@ -103,3 +103,4 @@ struct deadline_data {
 | 2026-05-10 | 阶段2-第2节 | mq-deadline 调度器：4个队列结构、dispatch 优先级、防饿死机制、bio与request关系确认 |
 | 2026-05-11 | 阶段2-第3节 | BFQ 调度器：按进程公平分配带宽、budget 预算机制、虚拟时间调度、weight 权重与带宽分配 |
 | 2026-05-11 | 阶段2-第4节 | kyber 调度器：令牌桶限流、低延迟优先、NVMe/UFS/eMMC 接口协议与颗粒类型 |
+| 2026-05-13 | 阶段2-第5节 | 多队列架构：blk-mq 理念、ctx（软件队列/收件箱）与 hctx（硬件队列/工作台）映射关系、tag 作为硬件资源钥匙、hctx 数量受硬件限制、竞争解决（原子操作+自旋锁） |
