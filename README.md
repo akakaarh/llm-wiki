@@ -46,7 +46,7 @@ python scripts/graph.py embedded --format json
 ### 软件：Linux 存储 I/O
 
 - **上次：** 阶段 4 完成（写路径）
-- **下次：** 待规划阶段 5
+- **下次：** 阶段 5 回顾与巩固
 
 ### 嵌入式
 
