@@ -45,8 +45,8 @@ python scripts/graph.py embedded --format json
 
 ### 软件：Linux 存储 I/O
 
-- **上次：** 阶段 2 完成（调度器 + 多队列架构）
-- **下次：** 阶段 3-1 回顾与自测
+- **上次：** 阶段 3-1 回顾自测完成
+- **下次：** 阶段 3-2 Buffered I/O 全景图
 
 ### 嵌入式
 
