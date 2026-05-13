@@ -18,7 +18,7 @@
 ---
 
 **阶段 4：写路径**
-状态：进行中
+状态：已完成
 
 ### 阶段 3 内容规划
 
@@ -144,3 +144,7 @@ struct deadline_data {
 | 2026-05-13 | 阶段3-第2节 | Buffered I/O 全景图：VFS→文件系统→page cache→bio→Block层→硬件→完成→copy_to_user |
 | 2026-05-13 | 阶段3-第3节 | DIO 全景图：VFS→文件系统→bio(指向用户page)→Block层→硬件→DMA直达用户buffer→ki_complete |
 | 2026-05-13 | 阶段3-第4节 | I/O 路径对比：Buffered vs DIO 完整对比、关键决策点、性能特性、适用场景 |
+| 2026-05-14 | 阶段4-第1节 | Buffered Write 路径：write() → page cache → 标记 dirty → 返回，数据持久化由 writeback 异步完成 |
+| 2026-05-14 | 阶段4-第2节 | Writeback 机制：触发时机（定时器/阈值/fsync/内存不足）、两个阈值（后台10%/前台20%）、刷盘流程 |
+| 2026-05-14 | 阶段4-第3节 | DIO 写路径：write() → 生成bio(指向用户page) → block层 → 硬件 → 等完成 → 返回，数据立即持久化 |
+| 2026-05-14 | 阶段4-第4节 | 写路径对比：Buffered vs DIO Write、page cache 按需分配、用户page/内核page/用户buffer 概念辨析 |
