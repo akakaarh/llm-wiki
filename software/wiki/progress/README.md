@@ -28,7 +28,7 @@
 ---
 
 **阶段 6：NVMe 驱动层**
-状态：进行中
+状态：已完成
 
 ### 阶段 3 内容规划
 
@@ -167,3 +167,7 @@ struct deadline_data {
 | 2026-05-14 | 阶段5-第1节 | 知识图谱梳理 + 自测：8 个核心概念测试，薄弱环节是 bio/request 生成层级（bio 文件系统生成，request block 层生成）、mq-deadline 4 队列（读/写 × 扇区排序/deadline 排序） |
 | 2026-05-14 | 阶段5-第2节 | 薄弱环节巩固：bio/request 生成层级已纠正，mq-deadline 4 队列已巩固（读/写 × 扇区排序/deadline 排序组合） |
 | 2026-05-14 | 阶段5-第3节 | 综合测试：8 个综合问题，薄弱环节是 DIO 数据写入机制（DMA 直接写入用户 page，ki_complete 只是回调）、执行上下文细节（dispatch 在进程上下文） |
+| 2026-05-15 | 阶段6-第1节 | NVMe 队列机制：SQ/CQ 结构、doorbell 机制、command_id 对应 tag |
+| 2026-05-15 | 阶段6-第2节 | NVMe 中断处理：MSI-X 中断、nvme_irq() 读取 CQ、通过 command_id 找 request |
+| 2026-05-15 | 阶段6-第3节 | NVMe 错误处理：CQ 状态字段、可重试/不可重试错误、超时处理 |
+| 2026-05-15 | 阶段6-第4节 | NVMe 完整 I/O 路径：读写操作全流程、NVMe/UFS/SCSI 协议对比 |

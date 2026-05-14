@@ -45,8 +45,8 @@ python scripts/graph.py embedded --format json
 
 ### 软件：Linux 存储 I/O
 
-- **上次：** 阶段 5 完成（回顾与巩固）
-- **下次：** 阶段 6-1 NVMe 队列机制
+- **上次：** 阶段 6 完成（NVMe 驱动层）
+- **下次：** 待规划阶段 7
 
 ### 嵌入式
 
