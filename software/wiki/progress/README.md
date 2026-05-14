@@ -23,7 +23,7 @@
 ---
 
 **阶段 5：回顾与巩固**
-状态：进行中 — 5-1 知识图谱 + 自测完成，5-2 薄弱环节巩固完成
+状态：已完成
 
 ### 阶段 3 内容规划
 
@@ -121,6 +121,8 @@ struct deadline_data {
 **需要多回顾的概念（2026-05-14 自测）：**
 - bio/request 生成层级：bio 由文件系统生成，request 由 block 层从 bio 转换（容易误以为 bio 生成 request）
 - mq-deadline 4 队列：读/写 × 扇区排序/deadline 排序（容易忘记组合关系）
+- DIO 数据写入机制：DMA 直接写入用户 page，ki_complete 只是唤醒进程的回调（容易误以为 ki_complete 写入数据）
+- 执行上下文：dispatch 在进程上下文（容易误以为在中断上下文）
 
 ---
 
@@ -159,3 +161,4 @@ struct deadline_data {
 | 2026-05-14 | 阶段4-第4节 | 写路径对比：Buffered vs DIO Write、page cache 按需分配、用户page/内核page/用户buffer 概念辨析 |
 | 2026-05-14 | 阶段5-第1节 | 知识图谱梳理 + 自测：8 个核心概念测试，薄弱环节是 bio/request 生成层级（bio 文件系统生成，request block 层生成）、mq-deadline 4 队列（读/写 × 扇区排序/deadline 排序） |
 | 2026-05-14 | 阶段5-第2节 | 薄弱环节巩固：bio/request 生成层级已纠正，mq-deadline 4 队列已巩固（读/写 × 扇区排序/deadline 排序组合） |
+| 2026-05-14 | 阶段5-第3节 | 综合测试：8 个综合问题，薄弱环节是 DIO 数据写入机制（DMA 直接写入用户 page，ki_complete 只是回调）、执行上下文细节（dispatch 在进程上下文） |

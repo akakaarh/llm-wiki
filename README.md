@@ -45,8 +45,8 @@ python scripts/graph.py embedded --format json
 
 ### 软件：Linux 存储 I/O
 
-- **上次：** 阶段 5-2 薄弱环节巩固完成
-- **下次：** 阶段 5-3 综合测试
+- **上次：** 阶段 5 完成（回顾与巩固）
+- **下次：** 阶段 6 NVMe 驱动层
 
 ### 嵌入式
 
