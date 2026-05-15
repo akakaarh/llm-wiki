@@ -45,8 +45,8 @@ python scripts/graph.py embedded --format json
 
 ### 软件：Linux 存储 I/O
 
-- **上次：** 阶段 6 完成（NVMe 驱动层）
-- **下次：** 阶段 7 综合复习
+- **上次：** 阶段 7 完成（综合复习）
+- **下次：** 阶段 8 性能调优实战
 
 ### 嵌入式
 
