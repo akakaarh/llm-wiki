@@ -17,6 +17,7 @@
 ## 综合 (!)
 
 - [!Linux_IO_Bio_BlockLayer](notes/!Linux_IO_Bio_BlockLayer.md) — Linux 块 I/O：bio 结构、block layer、request 生命周期、completion 路径
+- [!PerfTuning](perf-tuning/README.md) — Stage 8 性能调优：iostat/blktrace/ftrace/bpftrace 观测工具 + 实操任务
 
 ## Q&A (?)
 
@@ -24,4 +25,4 @@
 
 ---
 
-最后更新：2026-05-09
+最后更新：2026-05-16
