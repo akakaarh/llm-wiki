@@ -22,6 +22,7 @@
 
 ## 概念 (#)
 
+- [#ARM_ArchitectureOverview.md](concepts/#ARM_ArchitectureOverview.md) — ARMv7 三大配置（A/R/M）、ARMv8 演进（AArch32/AArch64）、授权模式、生态链
 - [#CortexA_ProcessorModes.md](concepts/#CortexA_ProcessorModes.md) — 处理器模式（USR/FIQ/IRQ/SVC/ABT/UND/SYS）、CPSR 标志位
 - [#ARM_InstructionSets.md](concepts/#ARM_InstructionSets.md) — ARM/Thumb/Thumb-2/NEON 指令集体系
 - [#MMU_VirtualMemory.md](concepts/#MMU_VirtualMemory.md) — MMU 页表结构、VA→PA 转换、内存类型与访问权限
@@ -38,4 +39,4 @@
 
 ---
 
-最后更新：2026-05-08
+最后更新：2026-05-16
