@@ -77,6 +77,32 @@
 - 内核参数（dirty_ratio 调大增吞吐/调小降延迟、nr_requests 控制队列深度）
 - 应用层优化（Buffered vs DIO 选择、对齐、减少 fsync、I/O 模式优化）
 
+---
+
+**阶段 9：ext4 文件系统**
+状态：待开始
+
+### 阶段 9 内容规划
+
+**9-1：ext4 基础**
+- 磁盘布局（superblock、block group、inode table）
+- inode 结构与文件元数据
+
+**9-2：Extent 机制**
+- extent tree 结构
+- 逻辑块→物理块映射
+- ext4_map_blocks 的作用
+
+**9-3：Journal（日志）**
+- JBD2 机制
+- data=ordered / data=writeback / data=journal 模式
+- fsync 的完整路径
+
+**9-4：ext4 生成 bio**
+- ext4_map_blocks 如何把文件 I/O 转换成 bio
+- submit_bio 之前的完整路径
+- 与 block 层的衔接
+
 ### 阶段 3 内容规划
 
 **3-1：回顾与自测**

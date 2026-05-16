@@ -46,7 +46,7 @@ python scripts/graph.py embedded --format json
 ### 软件：Linux 存储 I/O
 
 - **上次：** 阶段 8 完成（性能调优理论）
-- **下次：** 实操（WSL Claude Code Agent）
+- **下次：** 阶段 9 ext4 文件系统
 
 ### 嵌入式
 
