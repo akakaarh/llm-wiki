@@ -55,27 +55,27 @@
 ---
 
 **阶段 8：性能调优**
-状态：进行中
+状态：已完成
 
-> 理论学习在主对话，实操在 WSL Claude Code Agent
+> 理论学习完成，实操待 WSL Claude Code Agent 进行
 > 详细内容见 `wiki/perf-tuning/README.md`
 
-### 阶段 8 内容规划
+### 阶段 8 内容
 
-**8-1：观测工具入门**
-- iostat：设备级监控（理论已完成）
-- blktrace：request 级生命周期（理论已完成）
-- ftrace：内核函数级追踪（理论已完成）
-- bpftrace：自定义探针（理论已完成）
+**8-1：观测工具入门** ✓
+- iostat：设备级监控
+- blktrace：request 级生命周期
+- ftrace：内核函数级追踪
+- bpftrace：自定义探针
 
-**8-2：性能分析方法论**
-- 自顶向下分析法
-- 常见性能问题模式
+**8-2：性能分析方法论** ✓
+- 自顶向下分析法（iostat → blktrace → ftrace/bpftrace）
+- 常见问题模式（延迟高+util低=软件、延迟高+util高=硬件、吞吐低+util低=I/O模式）
 
-**8-3：调优手段**
-- I/O 调度器选择和参数调优
-- 内核参数调优
-- 应用层优化
+**8-3：调优手段** ✓
+- 调度器选择（HDD→mq-deadline/BFQ、NVMe→kyber/none）
+- 内核参数（dirty_ratio 调大增吞吐/调小降延迟、nr_requests 控制队列深度）
+- 应用层优化（Buffered vs DIO 选择、对齐、减少 fsync、I/O 模式优化）
 
 ### 阶段 3 内容规划
 
@@ -222,3 +222,5 @@ struct deadline_data {
 | 2026-05-16 | 阶段7-第2节 | 核心概念自测：8 个概念测试全过（bio/request 生成关系、tag 流控、mq-deadline 4 队列组合、DIO 零拷贝、dispatch 进程上下文、buffered write dirty page、BFQ 虚拟时间、kyber 令牌桶） |
 | 2026-05-16 | 阶段7-第3节 | 查漏补缺：writeback 机制补全（触发时机、两个阈值、刷盘流程） |
 | 2026-05-16 | 阶段8-第1节 | 观测工具入门：iostat 关键字段与判断方法、blktrace 事件时间线、ftrace 函数调用图、bpftrace 自定义探针与聚合统计。理论实操分离，实操在 WSL 进行 |
+| 2026-05-17 | 阶段8-第2节 | 性能分析方法论：自顶向下分析法（iostat→blktrace→ftrace/bpftrace）、4种常见问题模式（延迟高+util低=软件瓶颈、延迟高+util高=硬件瓶颈、吞吐低+util低=随机I/O、吞吐不稳定=干扰/限流） |
+| 2026-05-17 | 阶段8-第3节 | 调优手段：调度器选择（HDD→mq-deadline/BFQ、NVMe→kyber/none）、内核参数（dirty_ratio/nr_requests）、应用层优化（Buffered vs DIO 选择、对齐、减少fsync、I/O模式优化） |
