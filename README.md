@@ -45,8 +45,8 @@ python scripts/graph.py embedded --format json
 
 ### 软件：Linux 存储 I/O
 
-- **上次：** 阶段 8 完成（性能调优理论）
-- **下次：** 阶段 9 ext4 文件系统
+- **上次：** 阶段 9 进行中（9-1~9-3 完成，9-4 待学）
+- **下次：** 阶段 9-4 ext4 生成 bio
 
 ### 嵌入式
 

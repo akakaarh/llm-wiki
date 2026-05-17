@@ -80,25 +80,28 @@
 ---
 
 **阶段 9：ext4 文件系统**
-状态：待开始
+状态：进行中（9-1~9-3 完成，9-4 待学）
 
-### 阶段 9 内容规划
+### 阶段 9 内容
 
-**9-1：ext4 基础**
+**9-1：ext4 基础** ✓
 - 磁盘布局（superblock、block group、inode table）
 - inode 结构与文件元数据
+- 目录 = 文件名→inode编号映射
 
-**9-2：Extent 机制**
-- extent tree 结构
-- 逻辑块→物理块映射
-- ext4_map_blocks 的作用
+**9-2：Extent 机制** ✓
+- extent = 起始物理块 + 连续块数（比逐个指针高效）
+- extent tree（i_block 直接存 ≤4 个 extent，多了用树）
+- ext4_map_blocks：文件系统到 block 层的衔接点
+- inode 读取流程（确定块组→组内偏移→读磁盘→解析）
 
-**9-3：Journal（日志）**
-- JBD2 机制
-- data=ordered / data=writeback / data=journal 模式
-- fsync 的完整路径
+**9-3：Journal（日志）** ✓
+- 三种模式：journal（全记录）、ordered（默认，先数据后元数据）、writeback（最快但不安全）
+- journal 区 = 磁盘固定区域，写入绕过 page cache，顺序追加写入
+- fsync 完整路径（刷数据→写元数据到日志→提交日志）
+- ordered 模式断电安全性：旧文件完好，新写入丢失
 
-**9-4：ext4 生成 bio**
+**9-4：ext4 生成 bio**（待学）
 - ext4_map_blocks 如何把文件 I/O 转换成 bio
 - submit_bio 之前的完整路径
 - 与 block 层的衔接
@@ -250,3 +253,6 @@ struct deadline_data {
 | 2026-05-16 | 阶段8-第1节 | 观测工具入门：iostat 关键字段与判断方法、blktrace 事件时间线、ftrace 函数调用图、bpftrace 自定义探针与聚合统计。理论实操分离，实操在 WSL 进行 |
 | 2026-05-17 | 阶段8-第2节 | 性能分析方法论：自顶向下分析法（iostat→blktrace→ftrace/bpftrace）、4种常见问题模式（延迟高+util低=软件瓶颈、延迟高+util高=硬件瓶颈、吞吐低+util低=随机I/O、吞吐不稳定=干扰/限流） |
 | 2026-05-17 | 阶段8-第3节 | 调优手段：调度器选择（HDD→mq-deadline/BFQ、NVMe→kyber/none）、内核参数（dirty_ratio/nr_requests）、应用层优化（Buffered vs DIO 选择、对齐、减少fsync、I/O模式优化） |
+| 2026-05-17 | 阶段9-第1节 | ext4基础：磁盘布局（块组结构）、inode（文件元数据，不含文件名和内容）、目录（文件名→inode映射）、Superblock（全局元信息，部分块组有备份） |
+| 2026-05-17 | 阶段9-第2节 | Extent机制：extent=起始块+长度（比逐个指针高效）、extent tree（i_block直接存≤4个）、ext4_map_blocks（文件系统→block层衔接点）、inode读取完整流程 |
+| 2026-05-17 | 阶段9-第3节 | Journal日志：三种模式（journal全记录/ordered默认/writeback）、journal区=磁盘固定区域绕过page cache顺序写入、fsync完整路径、ordered断电安全性（旧文件完好新写入丢失） |
