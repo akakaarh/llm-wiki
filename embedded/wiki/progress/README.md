@@ -5,276 +5,343 @@
 
 ---
 
+## 双轨制说明
+
+本项目采用**双轨制学习**，两个vault进度独立，一个对话框内切换：
+
+| 关键词 | 操作 |
+|--------|------|
+| "继续嵌入式" | 读本文件，接着上次内容继续 |
+| "切到软件" | 读 `software/wiki/progress/README.md`，接着上次内容继续 |
+| "记录" | 更新当前vault进度文件 + git commit |
+| "新话题" | 在当前vault里开新阶段/新专题 |
+
+**规则：切换前必须先"记录"，否则新内容会丢失。**
+
+---
+
+## 开发板
+
+**STM32MP157**（二手~400元）
+- Cortex-A7（跑Linux）+ Cortex-M4（跑RTOS/裸机）
+- 双核异构，一块板覆盖阶段2-8
+- Bootlin课程直接覆盖此平台
+
+---
+
 ## 总体路线
 
 ```
-基础理论 → ARM架构 → Cortex-M深入 → 外设驱动 → RTOS → Cortex-A/Linux BSP
- (阶段1)    (阶段2)     (阶段3)       (阶段4)    (阶段5)    (阶段6)
+基础理论 → ARM架构 → Cortex-M深入 → 外设驱动 → RTOS → Linux设备驱动 → Cortex-A/BSP → 构建系统与安全
+ (阶段1)    (阶段2)     (阶段3)       (阶段4)    (阶段5)    (阶段6)        (阶段7)        (阶段8)
 ```
 
-| 阶段 | 名称 | 节数 | 难度 | 范围 |
-|------|------|------|------|------|
-| 1 | 嵌入式基础 | 4节 | ★★☆ | 广而浅 |
-| 2 | ARM 架构基础 | 4节 | ★★★ | 中（已有页面支撑） |
-| 3 | Cortex-M 架构深入 | 4节 | ★★★★ | 深 |
-| 4 | Cortex-M 外设与驱动 | 4节 | ★★★☆ | 偏实践 |
-| 5 | RTOS 理论 | 3节 | ★★★★ | 聚焦 |
-| 6 | Cortex-A 架构与 Linux BSP | 4节 | ★★★★★ | 非常广 |
+| 阶段 | 名称 | 类型 | 实操环境 | 难度 |
+|------|------|------|---------|------|
+| 1 | 嵌入式基础 | 纯理论 | 无 | ★★☆ |
+| 2 | ARM架构基础 + RISC-V概览 | 理论 | 无 | ★★★ |
+| 3 | Cortex-M架构深入 + JTAG/SWD | 理论+实操 | M4裸机 | ★★★★ |
+| 4 | Cortex-M外设与驱动 | 理论+实操 | M4外设 | ★★★☆ |
+| 5 | RTOS + 核间通信 | 理论+实操 | FreeRTOS on M4 | ★★★★ |
+| 6 | Linux设备驱动开发 | 理论+实操 | A7 Linux (WSL2+板上) | ★★★★★ |
+| 7 | Cortex-A架构与Linux BSP | 理论+实操 | U-Boot/内核bring-up | ★★★★★ |
+| 8 | 构建系统与安全 | 理论+实操 | Yocto/Buildroot | ★★★★ |
 
 **与 software vault 的关系：**
-- `embedded/` = 硬件架构 + 平台知识（ARM 处理器、外设、RTOS、启动流程、设备树）
-- `software/` = Linux 内核深入（block 层、存储 I/O、内核子系统）
-- 阶段6 是两者的交汇点：BSP 工程师既需要 Cortex-A 硬件知识（本 vault），也需要 Linux 内核知识（software vault）
+- `embedded/` = 硬件架构 + 平台知识 + 设备驱动 + BSP + 构建系统
+- `software/` = Linux 内核机制（block层、存储I/O、内存管理等），可独立扩展新专题
+- 阶段6 是两者的交汇点：驱动开发需要Linux内核知识（software vault）+ 硬件架构知识（本vault）
 
 ---
 
 ## 当前阶段
 
 **阶段 1：嵌入式基础**
-状态：未开始
+状态：已完成
+
+**阶段 2：ARM架构基础 + RISC-V概览**
+状态：进行中（2.1~2.3 完成，2.4~2.5 待学）
 
 ---
 
 ## 阶段详情
 
-### 阶段 1：嵌入式基础（嵌入式基础理论）
+### 阶段 1：嵌入式基础（已完成）
 
-**目标：** 建立嵌入式开发的前置知识栈 -- 数制编码、数字逻辑、嵌入式C、计算机体系结构基础。
+**目标：** 建立嵌入式开发的前置知识栈
 
 #### 1.1 数制与编码
-- 二进制/八进制/十六进制转换
-- 补码表示（有符号整数）
-- 定点数与浮点数（IEEE 754 概念）
-- BCD、ASCII、UTF-8 编码
-- **wiki 输出：** `#NumberSystems_Encoding.md`
+- 二进制/八进制/十六进制转换、补码、IEEE 754、BCD/ASCII/UTF-8
+- **wiki 输出：** `#NumberSystems_Encoding.md` ✅
 
 #### 1.2 数字逻辑基础
-- 布尔代数与逻辑门（AND/OR/NOT/XOR/NAND/NOR）
-- 触发器（D触发器、JK触发器）
-- 寄存器、多路选择器、解码器
-- 组合逻辑 vs 时序逻辑
-- **wiki 输出：** `#DigitalLogic_Basics.md`
+- 布尔代数、逻辑门、触发器、组合逻辑与时序逻辑
+- **wiki 输出：** `#DigitalLogic_Basics.md` ✅
 
 #### 1.3 嵌入式C语言
-- 位操作（置位/清位/翻转/掩码）
-- volatile 关键字（防止编译器优化）
-- 结构体对齐与打包（__attribute__((packed))）
-- 内存映射I/O（*(volatile uint32_t *)0x40021000）
-- 指针算术与类型转换
-- 大小端在C中的表现
-- **wiki 输出：** `#EmbeddedC_BitManipulation.md`, `#Endianness.md`
+- 位操作、volatile、结构体对齐、MMIO、指针算术、大小端
+- **wiki 输出：** `#EmbeddedC_BitManipulation.md` ✅, `#Endianness.md` ✅
 
 #### 1.4 计算机体系结构基础
-- CPU流水线概念（取指/译码/执行/访存/写回）
-- 总线架构（AHB高速总线/APB外设总线）
-- 存储层次（寄存器 → Cache → SRAM → DRAM → Flash）
-- 哈佛结构 vs 冯诺依曼结构
-- DMA概念（直接内存访问，CPU不参与数据搬运）
-- **wiki 输出：** `#ComputerArchitecture_Basics.md`
-
-**已有页面：** 无（本阶段为前置知识）
+- CPU流水线、AHB/APB总线、存储层次、DMA概念
+- **wiki 输出：** `#ComputerArchitecture_Basics.md` ✅
 
 ---
 
-### 阶段 2：ARM 架构基础
+### 阶段 2：ARM架构基础 + RISC-V概览
 
 **目标：** 理解ARM架构家族全貌、指令集体系、处理器模式，建立Cortex-A与Cortex-M的整体认知框架。
 
-#### 2.1 ARM 架构总览
+#### 2.1 ARM 架构总览 ✓
 - ARMv7 三大配置文件（A/R/M）
 - ARMv8 演进（AArch32/AArch64）
 - 架构版本号与授权模式
 - ARM 生态（IP授权 → 芯片厂商 → 终端产品）
 - **wiki 输出：** `#ARM_ArchitectureOverview.md`
 
-#### 2.2 指令集体系
-- ARM（32-bit）：定长指令、条件执行
-- Thumb（16-bit）：代码密度高
-- Thumb-2（16/32-bit混合）：Cortex-M唯一指令集
-- NEON（128-bit SIMD）：多媒体加速
-- 指令格式分类（Branch/Data Processing/Load-Store/Multiply）
-- 寄存器模型（R0-R15, SP/LR/PC）
-- **已有页面：** `#ARM_InstructionSets.md`（直接使用）
+#### 2.2 指令集体系 ✓
+- ARM（32-bit）、Thumb（16-bit）、Thumb-2（16/32-bit混合）、NEON（128-bit SIMD）
+- 指令格式分类、寄存器模型（R0-R15, SP/LR/PC）
+- 已有页面：`#ARM_InstructionSets.md`
 
-#### 2.3 Cortex-A 程序员模型
-- 7种处理器模式（USR/FIQ/IRQ/SVC/ABT/UND/SYS）
-- CPSR 标志位（N/Z/C/V/I/F/T/M[4:0]）
-- 模式切换（异常进入/SVC调用/ERET返回）
-- Banked 寄存器
-- MMU 与虚拟内存（两级页表、VA→PA转换、内存类型、访问权限）
-- **已有页面：** `#CortexA_ProcessorModes.md`, `#MMU_VirtualMemory.md`（直接使用）
+#### 2.3 Cortex-A 程序员模型 ✓
+- 7种处理器模式、CPSR标志位、模式切换、Banked寄存器
+- MMU与虚拟内存（两级页表、VA→PA转换、TLB）
+- 已有页面：`#CortexA_ProcessorModes.md`, `#MMU_VirtualMemory.md`
 
 #### 2.4 Cortex-M 与 Cortex-A 对比
-- Cortex-M 全系列型号对比（M0~M55，架构/特性/主频）
-- Cortex-A 全系列型号一览（A5~A72，big.LITTLE）
-- NVIC vs GIC 中断控制器对比
-- MPU vs MMU 内存保护对比
-- 功耗、成本、开发体验全方位对比
-- 选型决策树
-- **已有页面：** `@CortexM_Series.md`, `@CortexA_Series.md`, `#NVIC.md`, `#MPU_CortexM.md`, `!CortexA_vs_CortexM.md`（直接使用）
+- 全系列型号对比、NVIC vs GIC、MPU vs MMU、选型决策树
+- **已有页面：** `@CortexM_Series.md`, `@CortexA_Series.md`, `#NVIC.md`, `#MPU_CortexM.md`, `!CortexA_vs_CortexM.md`
+
+#### 2.5 RISC-V 架构概览（新增）
+- RISC-V ISA基础（RV32I/RV64I、扩展指令集）
+- 与ARM架构对比（指令集、特权级、异常模型）
+- Mainline kernel RISC-V支持现状
+- **wiki 输出：** `#RISC-V_ArchitectureOverview.md`
 
 **已有来源文档：** `$ARMv7M_RefManual.md`, `$CortexA_ProgrammersGuide.md`（参考）
 
 ---
 
-### 阶段 3：Cortex-M 架构深入
+### 阶段 3：Cortex-M架构深入 + JTAG/SWD
 
-**目标：** 深入理解Cortex-M内部机制 -- 异常模型、内存映射、系统控制、启动流程。
+**目标：** 深入理解Cortex-M内部机制，掌握硬件调试基础。
+**类型：** 理论+实操 | **环境：** M4裸机（STM32MP157）
 
 #### 3.1 异常模型
-- 异常类型（Reset/NMI/HardFault/MemManage/BusFault/UsageFault/SVCall/PendSV/SysTick）
-- 优先级配置（PRIGROUP、抢占优先级/子优先级）
-- 异常入口行为（硬件自动压栈：xPSR/PC/LR/R12/R0-R3）
-- 异常出口与EXC_RETURN值（0xFFFFFFF1/F9/FD）
-- 浮点上下文懒压栈（Lazy Stacking）
+- 异常类型、优先级配置、异常入口行为、EXC_RETURN、浮点懒压栈
 - **wiki 输出：** `#CortexM_ExceptionModel.md`
-- **已有页面引用：** `#NVIC.md`（在3.1中扩展异常模型知识）
 - **来源：** `$ARMv7M_RefManual.md` Part B
 
 #### 3.2 内存映射与总线
-- 4GB 地址空间布局（Code 512MB / SRAM 512MB / Peripheral 512MB / SCS 1MB）
-- 系统控制空间（SCS）寄存器映射
-- Bit-banding（位带别名区，原子位操作）
-- AHB-AP 调试访问端口
+- 4GB地址空间布局、SCS寄存器映射、Bit-banding、AHB-AP
 - **wiki 输出：** `#CortexM_MemoryMap.md`, `#BitBanding.md`
-- **来源：** `$ARMv7M_RefManual.md` B3章
 
 #### 3.3 系统控制与配置
-- SCB（系统控制块）关键寄存器（AIRCR/CCR/SCR/ICSR）
-- SysTick 定时器（24-bit递减计数器，用于RTOS tick）
-- 电源管理（WFI/WFE/Sleep-on-Exit/Low-Power Mode）
-- 时钟树基础（HSE/HSI/PLL/AHB/APB分频）
+- SCB关键寄存器、SysTick定时器、电源管理、时钟树基础
 - **wiki 输出：** `#CortexM_SystemControl.md`
-- **来源：** `$ARMv7M_RefManual.md` B3章
 
 #### 3.4 启动流程与链接
-- Reset Handler 执行序列
-- 向量表结构（SP初始值 + Reset_Handler + 各异常入口）
-- MSP/PSP 双栈指针机制
-- 链接脚本基础（.text/.data/.bss/堆栈布局）
-- 启动文件（startup_stm32fxxx.s）解析
+- Reset Handler执行序列、向量表结构、MSP/PSP双栈指针、链接脚本、启动文件解析
 - **wiki 输出：** `#CortexM_Startup.md`
+
+#### 3.5 JTAG/SWD调试基础（新增）
+- JTAG/SWD协议概念
+- OpenOCD + ST-Link环境搭建
+- GDB远程调试（断点、单步、寄存器查看）
+- **wiki 输出：** `#JTAG_SWD_Debugging.md`
+
+**实操练习（STM32MP157 M4核心）：**
+
+| 练习 | 内容 | 验证标准 |
+|------|------|---------|
+| 3-P1 | 搭建开发环境：arm-none-eabi-gcc + STM32CubeMP1 SDK + OpenOCD | `arm-none-eabi-gcc --version` 正常输出 |
+| 3-P2 | 第一个M4裸机程序：编译main.c，通过remoteproc加载到M4运行 | 串口/LED有输出 |
+| 3-P3 | JTAG调试：OpenOCD+ST-Link连接M4，GDB设断点、单步、查看寄存器 | `info registers` 看到R0-R15/CPSR |
+| 3-P4 | 异常触发实验：主动触发HardFault，GDB中观察入栈帧 | 能看到异常压栈的8个寄存器值 |
+| 3-P5 | SysTick实验：配置SysTick中断，LED每秒闪烁 | LED精确1秒周期闪烁 |
 
 ---
 
-### 阶段 4：Cortex-M 外设与驱动
+### 阶段 4：Cortex-M外设与驱动
 
-**目标：** 理解常见外设接口原理和寄存器级驱动模型（纯理论，不需要实际硬件）。
+**目标：** 理解常见外设接口原理和寄存器级驱动模型。
+**类型：** 理论+实操 | **环境：** M4外设（STM32MP157）
 
 #### 4.1 GPIO 与外部中断
-- GPIO 寄存器（MODER/ODR/IDR/BSRR/AFR）
-- 输入模式（浮空/上拉/下拉/模拟）
-- 输出模式（推挽/开漏）
-- EXTI（外部中断/事件控制器）：边沿触发、中断与事件区别
-- EXTI → NVIC 连接路径
+- GPIO寄存器、输入/输出模式、EXTI、EXTI→NVIC连接路径
 - **wiki 输出：** `#GPIO_ExternalInterrupts.md`
-- **已有页面引用：** `#NVIC.md`, `#MPU_CortexM.md`
 
 #### 4.2 通信协议
-- **UART**：帧格式（起始位/数据位/校验位/停止位）、波特率计算、硬件流控（RTS/CTS）、FIFO
-- **SPI**：主从模式、4种CPOL/CPHA模式、全双工、片选管理、多从机拓扑
-- **I2C**：7-bit/10-bit地址、ACK/NACK、时钟拉伸、多主仲裁、重复起始条件
-- 协议对比与选型
+- UART：帧格式、波特率计算、硬件流控、FIFO
+- SPI：主从模式、4种CPOL/CPHA、全双工、片选管理
+- I2C：7-bit/10-bit地址、ACK/NACK、时钟拉伸、多主仲裁
 - **wiki 输出：** `#UART_Protocol.md`, `#SPI_Protocol.md`, `#I2C_Protocol.md`
 
 #### 4.3 定时器与PWM
-- 基本定时器（预分频器 + 自动重载计数器）
-- 输入捕获（测量脉冲宽度/频率）
-- 输出比较（定时翻转/产生延迟）
-- PWM 生成原理（占空比 = CCR/ARR）
-- 看门狗定时器（IWDG独立看门狗 / WWDG窗口看门狗）
+- 基本定时器、输入捕获、输出比较、PWM生成、看门狗
 - **wiki 输出：** `#Timer_PWM.md`
 
 #### 4.4 DMA与ADC
-- DMA 通道/数据流概念
-- 传输模式（外设→内存 / 内存→外设 / 内存→内存）
-- 循环模式 vs 普通模式
-- DMA 与外设配合（UART_RX + DMA示例）
-- ADC 基础（分辨率、采样时间、通道多路复用、扫描模式）
-- **wiki 输出：** `#DMA_Controller.md`, `#ADC_Basics.md`
-- **wiki 输出：** `@STM32_Peripherals.md`（STM32外设寄存器概览，作为参考实体）
+- DMA通道/数据流、传输模式、循环模式、ADC基础
+- **wiki 输出：** `#DMA_Controller.md`, `#ADC_Basics.md`, `@STM32_Peripherals.md`
+
+**实操练习（STM32MP157 M4核心）：**
+
+| 练习 | 内容 | 验证标准 |
+|------|------|---------|
+| 4-P1 | GPIO输出：直接写MODER/ODR/BSRR控制LED | 串口控制LED开/关 |
+| 4-P2 | GPIO输入：读IDR获取按钮状态 | 按钮按下，LED响应 |
+| 4-P3 | UART发送：初始化USART寄存器，发送字符串 | 串口终端看到"Hello from M4" |
+| 4-P4 | UART接收+中断：收到字符后原样回显 | 串口输入字符，立刻回显 |
+| 4-P5 | SPI通信：读取外部器件JEDEC ID | 正确读取厂商ID和设备ID |
+| 4-P6 | Timer PWM：产生PWM控制LED亮度 | LED亮度平滑渐变 |
+| 4-P7 | DMA传输：内存→UART发送，CPU不参与搬运 | 大量数据发送时CPU占用率低 |
 
 ---
 
-### 阶段 5：RTOS 理论
+### 阶段 5：RTOS + 核间通信
 
-**目标：** 理解实时操作系统的核心概念、任务调度、同步机制，以及RTOS如何利用Cortex-M硬件特性。
+**目标：** 理解RTOS核心概念，体验异构SoC真实工作模式。
+**类型：** 理论+实操 | **环境：** FreeRTOS on M4（STM32MP157）
 
 #### 5.1 RTOS 基础概念
-- 任务（Task）vs 线程（Thread）
-- 任务状态模型（Ready / Running / Blocked / Suspended）
-- 上下文切换机制（保存/恢复寄存器）
-- 调度算法（时间片轮转、优先级抢占、协作式调度）
-- Tick 机制（SysTick 驱动调度节拍）
+- 任务状态模型、上下文切换、调度算法、Tick机制
 - **wiki 输出：** `#RTOS_Fundamentals.md`
 
 #### 5.2 同步与通信
-- 信号量（二值信号量 / 计数信号量）
-- 互斥锁（Mutex）与优先级反转问题
-- 优先级继承协议（Priority Inheritance）
-- 消息队列（任务间数据传递）
-- 事件标志组（Event Groups）
-- 死锁条件与预防
+- 信号量、互斥锁、优先级继承、消息队列、事件标志组、死锁
 - **wiki 输出：** `#RTOS_Synchronization.md`
 
 #### 5.3 内存管理与RTOS内部机制
-- 固定大小内存块分配 vs 动态堆分配
-- 每任务独立栈（栈大小估算）
-- MPU 实现任务隔离（MPU区域分配策略）
-- PendSV 实现上下文切换（延迟异常，最低优先级）
-- FreeRTOS / RT-Thread / Zephyr 特性对比
-- RTOS 移植到 Cortex-M 的关键步骤
+- 内存分配、栈大小估算、MPU任务隔离、PendSV上下文切换
+- **新增：** Zephyr RTOS（DT+Kconfig模型、与Linux技能迁移）
+- **新增：** A7↔M4核间通信（RPMSG/共享内存）
+- FreeRTOS / Zephyr / RT-Thread 对比
 - **wiki 输出：** `#RTOS_MemoryManagement.md`, `#ContextSwitch_CortexM.md`, `!RTOS_Comparison.md`
-- **已有页面引用：** `#NVIC.md`（PendSV/SysTick优先级配置）, `#MPU_CortexM.md`（任务隔离）, `@CortexM_Series.md`（MPU支持情况）
+
+**实操练习（STM32MP157）：**
+
+| 练习 | 内容 | 验证标准 |
+|------|------|---------|
+| 5-P1 | FreeRTOS移植到M4：两个任务交替闪烁不同LED | 两个LED独立闪烁 |
+| 5-P2 | 信号量同步：Task1产生数据，Task2通过信号量获取处理 | 串口输出结果，无数据丢失 |
+| 5-P3 | RPMSG通信：A7 Linux ↔ M4 FreeRTOS互发消息 | `cat /dev/ttyRPMSG0` 收到M4消息 |
+| 5-P4 | 综合案例：M4采集数据，通过RPMSG发给A7处理 | Linux实时显示M4数据 |
 
 ---
 
-### 阶段 6：Cortex-A 架构与 Linux BSP
+### 阶段 6：Linux设备驱动开发（新增）
 
-**目标：** 理解Cortex-A系统架构，掌握BSP开发特有的核心知识。Linux内核深入内容（block层、存储子系统）已在 software vault 学习，此处聚焦硬件架构和BSP工作流。
+**目标：** 掌握Linux驱动开发核心技能。BSP工程师的核心产出是驱动代码。
+**类型：** 理论+实操 | **环境：** A7 Linux（WSL2 + 板上）
 
-#### 6.1 Cortex-A 系统架构
-- 特权级模型（PL0用户态 / PL1内核态 / PL2 Hypervisor）
-- GIC 中断控制器架构（Distributor / Redistributor / CPU Interface）
-  - 中断类型（SGI/PPI/SPI）
-  - 多核中断路由
-- Cache 架构（L1 I-Cache/D-Cache、L2统一Cache）
-  - 写直达（Write-Through）vs 写回（Write-Back）
-  - Cache一致性（MESI协议概念）
-- TrustZone 基础（Secure World / Normal World / Monitor Mode / SMC调用）
+#### 6.1 Linux设备模型
+- platform_device / platform_driver
+- 设备树匹配（of_match_table）
+- 总线-设备-驱动模型、设备属性（sysfs、uevent）
+- **wiki 输出：** `#Linux_DeviceModel.md`
+
+#### 6.2 字符设备驱动
+- cdev注册、file_operations
+- 用户空间↔内核空间数据交互、ioctl接口、并发控制
+- **wiki 输出：** `#CharDevice_Driver.md`
+
+#### 6.3 设备树实战
+- DTS语法回顾、pinctrl/clock/regulator/GPIO子系统
+- **wiki 输出：** `#DeviceTree_Practice.md`
+
+#### 6.4 中断与DMA驱动
+- request_irq / threaded_irq、上半部/下半部
+- DMA API（dma_alloc_coherent、dma_map_sg）
+- **wiki 输出：** `#Interrupt_Driver.md`
+
+#### 6.5 IIO子系统与实战
+- IIO框架、ADC/传感器驱动模板、buffer与trigger
+- 综合实战：从硬件spec到完整驱动
+- **wiki 输出：** `#IIO_Framework.md`
+
+**实操练习（STM32MP157 A7 Linux）：**
+
+| 练习 | 内容 | 验证标准 |
+|------|------|---------|
+| 6-P1 | Hello World内核模块：编写、insmod加载、rmmod卸载 | `dmesg` 显示 "Hello from kernel" |
+| 6-P2 | 字符设备驱动：cdev + read/write/ioctl | `echo` 写入成功，`cat` 读回 |
+| 6-P3 | 设备树入门：DTS添加自定义节点 | `/proc/device-tree/` 下有对应目录 |
+| 6-P4 | platform_driver实战：设备树匹配 + probe | dmesg显示 "probe called" |
+| 6-P5 | GPIO LED驱动：设备树+GPIO描述符API+sysfs | `echo 1 > /sys/class/leds/my-led/brightness` LED亮 |
+| 6-P6 | 中断驱动：设备树描述按钮+中断处理函数 | dmesg显示 "button pressed" |
+| 6-P7 | 综合实战：完整platform driver（GPIO+中断+sysfs） | 全流程跑通 |
+
+---
+
+### 阶段 7：Cortex-A架构与Linux BSP
+
+**目标：** 理解Cortex-A系统架构，掌握BSP开发完整流程。
+**类型：** 理论+实操 | **环境：** U-Boot/内核bring-up（STM32MP157）
+
+#### 7.1 Cortex-A 系统架构
+- 特权级模型（PL0/PL1/PL2）、GIC中断控制器、Cache架构、TrustZone基础
 - **wiki 输出：** `#GIC_InterruptController.md`, `#Cache_Architecture.md`, `#TrustZone_Basics.md`
-- **已有页面引用：** `#CortexA_ProcessorModes.md`（扩展PL0/PL1/PL2）, `#MMU_VirtualMemory.md`（Cache与MMU关系）, `$CortexA_ProgrammersGuide.md`
 
-#### 6.2 启动流程
-- SoC 启动ROM（Boot ROM，芯片固化代码）
-- ARM Trusted Firmware（ATF/TF-A）启动阶段
-  - BL1：安全初始化，加载BL2
-  - BL2：平台初始化，加载BL31/BL33
-  - BL31：EL3 Runtime（安全监控）
-  - BL33：Non-Secure启动（U-Boot/Linux）
-- U-Boot 基础（环境变量、bootcmd、加载内核）
-- 内核镜像格式（zImage / Image / uImage）
-- DTB（设备树二进制）加载
+#### 7.2 启动流程
+- Boot ROM → ATF/TF-A → U-Boot → Linux内核 → init
+- 内核镜像格式、DTB加载
 - **wiki 输出：** `#SoC_BootProcess.md`
 
-#### 6.3 设备树与硬件描述
-- DTS/DTB 语法（节点、属性、compatible字符串、reg、interrupts）
-- 设备树层级结构（SoC级 → 板级 → 覆盖）
-- pinctrl 子系统（引脚复用配置）
-- clock 子系统（时钟树管理）
-- regulator 子系统（电源管理）
-- 内核如何解析设备树（of_platform_populate）
+#### 7.3 设备树与硬件描述
+- DTS/DTB语法、设备树层级结构、pinctrl/clock/regulator子系统
+- 内核解析设备树（of_platform_populate）
 - **wiki 输出：** `#DeviceTree_Syntax.md`
 
-#### 6.4 BSP 开发工作流
-- BSP 包组成（bootloader配置、内核配置、设备树、驱动代码、根文件系统）
-- 设备驱动模型（platform_device / platform_driver，设备树匹配）
-- 内核移植步骤（选defconfig → 适配设备树 → 调试串口 → 驱动逐个bring-up）
-- 交叉编译工具链（aarch64-linux-gnu-gcc / arm-linux-gnueabihf-gcc）
-- 调试手段（JTAG/SWD、串口控制台、earlycon、ftrace）
-- 常见BSP交付物
+#### 7.4 BSP 开发工作流
+- BSP包组成、设备驱动模型、内核移植步骤
+- 交叉编译工具链、调试手段（ftrace/eBPF）
 - **wiki 输出：** `#BSP_Development.md`
-- **已有页面引用：** `@CortexA_Series.md`（SoC选型参考）, `$CortexA_ProgrammersGuide.md`（架构参考）
+
+**实操练习（STM32MP157）：**
+
+| 练习 | 内容 | 验证标准 |
+|------|------|---------|
+| 7-P1 | 交叉编译环境搭建 | `arm-linux-gnueabihf-gcc --version` 正常 |
+| 7-P2 | 编译Linux内核（STM32MP157 defconfig） | `arch/arm/boot/` 有zImage和dtb |
+| 7-P3 | U-Boot编译与启动 | 串口看到U-Boot banner和"Starting kernel..." |
+| 7-P4 | 内核bring-up：自编译内核启动 | `uname -a` 显示自编译版本 |
+| 7-P5 | 串口调试：排查console无输出/rootfs挂载失败 | 能独立修复启动失败 |
+| 7-P6 | ftrace实战：跟踪驱动probe函数调用链 | trace文件显示完整调用图 |
+
+---
+
+### 阶段 8：构建系统与安全（新增）
+
+**目标：** 掌握Yocto/Buildroot构建系统和Secure Boot/OTA。
+**类型：** 理论+实操 | **环境：** Yocto/Buildroot（WSL2 + STM32MP157）
+
+#### 8.1 Yocto Project
+- BitBake基础、layer概念、recipe编写
+- BSP layer开发、定制image、SDK生成
+- **wiki 输出：** `#Yocto_BitBake.md`
+
+#### 8.2 Buildroot
+- 配置系统（menuconfig）、自定义board定义
+- 与Yocto对比选型
+- **wiki 输出：** `#Buildroot.md`
+
+#### 8.3 Secure Boot与OTA
+- ARM TrustZone与Secure Boot链
+- Verified Boot（U-Boot FIT image签名）
+- OTA框架（SWUpdate/Mender/RAUC）
+- **wiki 输出：** `#SecureBoot_OTA.md`
+
+**实操练习（STM32MP157）：**
+
+| 练习 | 内容 | 验证标准 |
+|------|------|---------|
+| 8-P1 | Yocto环境搭建：安装依赖、下载poky、配置machine | `bitbake -e` 无报错 |
+| 8-P2 | 构建最小镜像：bitbake core-image-minimal | 镜像构建成功，板上启动登录 |
+| 8-P3 | 自定义Yocto recipe：编译自己的驱动模块集成到镜像 | 模块随镜像烧录，insmod正常加载 |
+| 8-P4 | Buildroot构建：为STM32MP157构建镜像 | 镜像启动成功，能对比两者差异 |
+| 8-P5 | Secure Boot签名：U-Boot FIT image签名 | 篡改镜像启动失败，正确签名正常启动 |
 
 ---
 
@@ -282,28 +349,32 @@
 
 | 已有页面 | 归入阶段 | 说明 |
 |----------|----------|------|
-| `$CortexA_ProgrammersGuide.md` | 阶段2（主）、阶段6（参考） | Cortex-A架构主要来源 |
+| `$CortexA_ProgrammersGuide.md` | 阶段2（主）、阶段7（参考） | Cortex-A架构主要来源 |
 | `$ARMv7M_RefManual.md` | 阶段2（参考）、阶段3（主） | Cortex-M架构主要来源 |
-| `@CortexA_Series.md` | 阶段2、阶段6 | Cortex-A型号总览 |
+| `@CortexA_Series.md` | 阶段2、阶段7 | Cortex-A型号总览 |
 | `@CortexM_Series.md` | 阶段2、阶段5 | Cortex-M型号对比 |
 | `#ARM_InstructionSets.md` | 阶段2.2 | 指令集体系 |
-| `#CortexA_ProcessorModes.md` | 阶段2.3、阶段6.1 | 处理器模式（阶段6扩展PL0/PL1/PL2） |
-| `#MMU_VirtualMemory.md` | 阶段2.3、阶段6.1 | 虚拟内存（阶段6扩展Cache关系） |
-| `#NVIC.md` | 阶段2.4、阶段3.1、阶段5.3 | 中断控制器（阶段3扩展异常模型，阶段5扩展RTOS中断管理） |
-| `#MPU_CortexM.md` | 阶段2.4、阶段4.1、阶段5.3 | 内存保护（阶段4引用外设保护，阶段5扩展任务隔离） |
+| `#CortexA_ProcessorModes.md` | 阶段2.3、阶段7.1 | 处理器模式 |
+| `#MMU_VirtualMemory.md` | 阶段2.3、阶段7.1 | 虚拟内存 |
+| `#NVIC.md` | 阶段2.4、阶段3.1、阶段5.3 | 中断控制器 |
+| `#MPU_CortexM.md` | 阶段2.4、阶段4.1、阶段5.3 | 内存保护 |
 | `!CortexA_vs_CortexM.md` | 阶段2.4 | 全面对比 |
 
 ---
 
-## 学习笔记
+## 预计新增页面汇总
 
-（随学习进度记录）
-
----
-
-## 待填补缺口
-
-（随学习进度更新）
+| 阶段 | 新增页面数 | 页面列表 |
+|------|-----------|----------|
+| 阶段1 | 5 | `#NumberSystems_Encoding.md`, `#DigitalLogic_Basics.md`, `#EmbeddedC_BitManipulation.md`, `#ComputerArchitecture_Basics.md`, `#Endianness.md` ✅ |
+| 阶段2 | 2 | `#ARM_ArchitectureOverview.md`, `#RISC-V_ArchitectureOverview.md` |
+| 阶段3 | 6 | `#CortexM_ExceptionModel.md`, `#CortexM_MemoryMap.md`, `#CortexM_SystemControl.md`, `#CortexM_Startup.md`, `#BitBanding.md`, `#JTAG_SWD_Debugging.md` |
+| 阶段4 | 8 | `#GPIO_ExternalInterrupts.md`, `#UART_Protocol.md`, `#SPI_Protocol.md`, `#I2C_Protocol.md`, `#Timer_PWM.md`, `#DMA_Controller.md`, `#ADC_Basics.md`, `@STM32_Peripherals.md` |
+| 阶段5 | 5 | `#RTOS_Fundamentals.md`, `#RTOS_Synchronization.md`, `#RTOS_MemoryManagement.md`, `#ContextSwitch_CortexM.md`, `!RTOS_Comparison.md` |
+| 阶段6 | 5 | `#Linux_DeviceModel.md`, `#CharDevice_Driver.md`, `#DeviceTree_Practice.md`, `#Interrupt_Driver.md`, `#IIO_Framework.md` |
+| 阶段7 | 6 | `#GIC_InterruptController.md`, `#Cache_Architecture.md`, `#TrustZone_Basics.md`, `#SoC_BootProcess.md`, `#DeviceTree_Syntax.md`, `#BSP_Development.md` |
+| 阶段8 | 3 | `#Yocto_BitBake.md`, `#Buildroot.md`, `#SecureBoot_OTA.md` |
+| **合计** | **40** | |
 
 ---
 
@@ -312,21 +383,10 @@
 | 日期 | 阶段 | 内容摘要 |
 |------|------|----------|
 | 2026-05-08 | 初始化 | 创建学习路线，6阶段24节，整合已有13个wiki页面 |
+| 2026-05-09 | 阶段1完成 | 嵌入式基础5个概念页面全部完成 |
+| 2026-05-17 | 路线升级 | 6阶段→8阶段，新增Linux设备驱动(阶段6)和构建系统与安全(阶段8)；加入STM32MP157开发板实操计划；加入RISC-V概览和Zephyr RTOS；引入双轨制学习（embedded+software单一对话框切换） |
+| 2026-05-18 | 阶段2-2.1~2.3 | ARM架构总览（版本号/Profile/授权模式/生态）、指令集体系（ARM/Thumb-2/Interworking/寄存器模型/NEON）、Cortex-A程序员模型（7种模式/Banked寄存器/特权级/SWI系统调用/MMU两级页表/TLB） |
 
 ---
 
-## 预计新增页面汇总
-
-| 阶段 | 新增页面数 | 页面列表 |
-|------|-----------|----------|
-| 阶段1 | 5 | `#NumberSystems_Encoding.md`, `#DigitalLogic_Basics.md`, `#EmbeddedC_BitManipulation.md`, `#ComputerArchitecture_Basics.md`, `#Endianness.md` |
-| 阶段2 | 1 | `#ARM_ArchitectureOverview.md` |
-| 阶段3 | 5 | `#CortexM_ExceptionModel.md`, `#CortexM_MemoryMap.md`, `#CortexM_SystemControl.md`, `#CortexM_Startup.md`, `#BitBanding.md` |
-| 阶段4 | 8 | `#GPIO_ExternalInterrupts.md`, `#UART_Protocol.md`, `#SPI_Protocol.md`, `#I2C_Protocol.md`, `#Timer_PWM.md`, `#DMA_Controller.md`, `#ADC_Basics.md`, `@STM32_Peripherals.md` |
-| 阶段5 | 5 | `#RTOS_Fundamentals.md`, `#RTOS_Synchronization.md`, `#RTOS_MemoryManagement.md`, `#ContextSwitch_CortexM.md`, `!RTOS_Comparison.md` |
-| 阶段6 | 7 | `#GIC_InterruptController.md`, `#Cache_Architecture.md`, `#TrustZone_Basics.md`, `#SoC_BootProcess.md`, `#DeviceTree_Syntax.md`, `#BSP_Development.md` |
-| **合计** | **31** | |
-
----
-
-最后更新：2026-05-08
+最后更新：2026-05-18
