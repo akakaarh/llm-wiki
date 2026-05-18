@@ -60,7 +60,7 @@
 状态：已完成
 
 **阶段 2：ARM架构基础 + RISC-V概览**
-状态：进行中（2.1~2.3 完成，2.4~2.5 待学）
+状态：已完成
 
 ---
 
@@ -109,14 +109,16 @@
 - MMU与虚拟内存（两级页表、VA→PA转换、TLB）
 - 已有页面：`#CortexA_ProcessorModes.md`, `#MMU_VirtualMemory.md`
 
-#### 2.4 Cortex-M 与 Cortex-A 对比
-- 全系列型号对比、NVIC vs GIC、MPU vs MMU、选型决策树
-- **已有页面：** `@CortexM_Series.md`, `@CortexA_Series.md`, `#NVIC.md`, `#MPU_CortexM.md`, `!CortexA_vs_CortexM.md`
+#### 2.4 Cortex-M 与 Cortex-A 对比 ✓
+- NVIC vs GIC（确定性12周期 vs 多核灵活路由）
+- MPU vs MMU（8区域无虚拟地址 vs 页表翻译进程隔离）
+- 选型决策树（实时→M、Linux→A、都要→双核异构）
+- 已有页面：`@CortexM_Series.md`, `@CortexA_Series.md`, `#NVIC.md`, `#MPU_CortexM.md`, `!CortexA_vs_CortexM.md`
 
-#### 2.5 RISC-V 架构概览（新增）
-- RISC-V ISA基础（RV32I/RV64I、扩展指令集）
-- 与ARM架构对比（指令集、特权级、异常模型）
-- Mainline kernel RISC-V支持现状
+#### 2.5 RISC-V 架构概览 ✓
+- 开源免费、模块化ISA（RV32I基础47条 + 可选扩展M/F/D/C/A/V）
+- 3级特权（U/S/M）、硬件简化软件补
+- Linux mainline支持现状（RV64成熟，RV32完善中）
 - **wiki 输出：** `#RISC-V_ArchitectureOverview.md`
 
 **已有来源文档：** `$ARMv7M_RefManual.md`, `$CortexA_ProgrammersGuide.md`（参考）
@@ -386,6 +388,7 @@
 | 2026-05-09 | 阶段1完成 | 嵌入式基础5个概念页面全部完成 |
 | 2026-05-17 | 路线升级 | 6阶段→8阶段，新增Linux设备驱动(阶段6)和构建系统与安全(阶段8)；加入STM32MP157开发板实操计划；加入RISC-V概览和Zephyr RTOS；引入双轨制学习（embedded+software单一对话框切换） |
 | 2026-05-18 | 阶段2-2.1~2.3 | ARM架构总览（版本号/Profile/授权模式/生态）、指令集体系（ARM/Thumb-2/Interworking/寄存器模型/NEON）、Cortex-A程序员模型（7种模式/Banked寄存器/特权级/SWI系统调用/MMU两级页表/TLB） |
+| 2026-05-18 | 阶段2-2.4~2.5 | Cortex-M与A对比（NVIC确定性vs GIC多核、MPU简单vs MMU完整、选型决策树）、RISC-V概览（开源免费/模块化ISA/3级特权/Linux支持） |
 
 ---
 
