@@ -5,6 +5,24 @@
 
 ---
 
+## 双轨制说明
+
+本项目采用**双轨制学习**，与 `embedded/wiki/progress/README.md` 配合使用。
+
+| 关键词 | 操作 |
+|--------|------|
+| "继续嵌入式" | 读 `embedded/wiki/progress/README.md`，接着上次内容继续 |
+| "切到软件" | 读本文件，接着上次内容继续 |
+| "记录" | 更新当前vault进度文件 + git commit |
+| "新话题" | 在当前vault里开新阶段/新专题 |
+| "新专题 XXX" | 在当前vault里创建新的独立学习专题 |
+
+**规则：切换前必须先"记录"，否则新内容会丢失。**
+
+本vault可独立扩展新专题（如MM、网络等），不受嵌入式路线约束。
+
+---
+
 ## 当前阶段
 
 **阶段 2：request 在 scheduler 的生命周期**
@@ -80,7 +98,7 @@
 ---
 
 **阶段 9：ext4 文件系统**
-状态：进行中（9-1~9-3 完成，9-4 待学）
+状态：已完成
 
 ### 阶段 9 内容
 
@@ -101,10 +119,13 @@
 - fsync 完整路径（刷数据→写元数据到日志→提交日志）
 - ordered 模式断电安全性：旧文件完好，新写入丢失
 
-**9-4：ext4 生成 bio**（待学）
-- ext4_map_blocks 如何把文件 I/O 转换成 bio
-- submit_bio 之前的完整路径
-- 与 block 层的衔接
+**9-4：ext4 生成 bio** ✓
+- iomap 框架：三层结构（ext4_map_blocks → struct iomap → iomap 生成 bio）
+- ext4_iomap_begin()：ext4 与 iomap 的衔接回调
+- Buffered read：page cache miss → readahead → iomap 生成 bio → submit_bio
+- Buffered write：copy_from_user → 标 dirty → write() 返回 → writeback 触发 → iomap 生成 bio → submit_bio
+- DIO：直接生成 bio 挂用户 page → submit_bio → 等 bio completion
+- HOLE 处理：不发 bio，内存填零返回（安全保证）
 
 ### 阶段 3 内容规划
 
@@ -256,3 +277,4 @@ struct deadline_data {
 | 2026-05-17 | 阶段9-第1节 | ext4基础：磁盘布局（块组结构）、inode（文件元数据，不含文件名和内容）、目录（文件名→inode映射）、Superblock（全局元信息，部分块组有备份） |
 | 2026-05-17 | 阶段9-第2节 | Extent机制：extent=起始块+长度（比逐个指针高效）、extent tree（i_block直接存≤4个）、ext4_map_blocks（文件系统→block层衔接点）、inode读取完整流程 |
 | 2026-05-17 | 阶段9-第3节 | Journal日志：三种模式（journal全记录/ordered默认/writeback）、journal区=磁盘固定区域绕过page cache顺序写入、fsync完整路径、ordered断电安全性（旧文件完好新写入丢失） |
+| 2026-05-18 | 阶段9-第4节 | ext4生成bio：iomap框架三层结构（ext4_map_blocks→struct iomap→bio）、ext4_iomap_begin衔接回调、buffered read（readahead阶段同步生成bio）、buffered write（writeback异步生成bio）、DIO（直接挂用户page同步等待completion）、HOLE填零安全保证 |
