@@ -127,6 +127,29 @@
 - DIO：直接生成 bio 挂用户 page → submit_bio → 等 bio completion
 - HOLE 处理：不发 bio，内存填零返回（安全保证）
 
+---
+
+**专题：VFS（虚拟文件系统）**
+状态：已完成
+
+### VFS 内容规划
+
+**VFS-1：VFS 概述与核心数据结构** ✓
+- VFS 是什么、为什么需要它
+- 四大核心对象：superblock、inode、dentry、file
+- VFS 在 I/O 路径中的位置
+
+**VFS-2：VFS 与文件系统的衔接** ✓
+- file_operations / inode_operations / super_operations 函数指针多态
+- VFS 如何路由 read()/write() 到具体文件系统
+- 与已学知识（ext4、iomap、block 层）的衔接
+
+**VFS-3：Page Cache 机制** ✓
+- page cache 是 VFS 层的通用机制，不属于具体文件系统
+- address_space 结构与 address_space_operations
+- cache miss 时调文件系统 readpage 回调读磁盘
+- 同一文件多次读只读一次磁盘
+
 ### 阶段 3 内容规划
 
 **3-1：回顾与自测**
@@ -279,3 +302,4 @@ struct deadline_data {
 | 2026-05-17 | 阶段9-第3节 | Journal日志：三种模式（journal全记录/ordered默认/writeback）、journal区=磁盘固定区域绕过page cache顺序写入、fsync完整路径、ordered断电安全性（旧文件完好新写入丢失） |
 | 2026-05-18 | 阶段9-第4节 | ext4生成bio：iomap框架三层结构（ext4_map_blocks→struct iomap→bio）、ext4_iomap_begin衔接回调、buffered read（readahead阶段同步生成bio）、buffered write（writeback异步生成bio）、DIO（直接挂用户page同步等待completion）、HOLE填零安全保证 |
 | 2026-05-20 | 综合复习 | 阶段1-9全面复习（5轮30题）：bio/block层、调度器/多队列、完整I/O路径、NVMe、ext4。薄弱点已巩固：bio/request生成层级、mq-deadline 4队列组合、buffered read路径顺序、前台/后台回写区别、DMA写入目标 |
+| 2026-05-20 | VFS专题 | VFS概述（统一接口层）、四大核心对象（superblock/inode/dentry/file）、函数指针多态（file_operations等三套操作表）、Page Cache机制（VFS层通用缓存，address_space连接文件系统readpage回调） |
