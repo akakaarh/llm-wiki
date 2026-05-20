@@ -278,3 +278,4 @@ struct deadline_data {
 | 2026-05-17 | 阶段9-第2节 | Extent机制：extent=起始块+长度（比逐个指针高效）、extent tree（i_block直接存≤4个）、ext4_map_blocks（文件系统→block层衔接点）、inode读取完整流程 |
 | 2026-05-17 | 阶段9-第3节 | Journal日志：三种模式（journal全记录/ordered默认/writeback）、journal区=磁盘固定区域绕过page cache顺序写入、fsync完整路径、ordered断电安全性（旧文件完好新写入丢失） |
 | 2026-05-18 | 阶段9-第4节 | ext4生成bio：iomap框架三层结构（ext4_map_blocks→struct iomap→bio）、ext4_iomap_begin衔接回调、buffered read（readahead阶段同步生成bio）、buffered write（writeback异步生成bio）、DIO（直接挂用户page同步等待completion）、HOLE填零安全保证 |
+| 2026-05-20 | 综合复习 | 阶段1-9全面复习（5轮30题）：bio/block层、调度器/多队列、完整I/O路径、NVMe、ext4。薄弱点已巩固：bio/request生成层级、mq-deadline 4队列组合、buffered read路径顺序、前台/后台回写区别、DMA写入目标 |
