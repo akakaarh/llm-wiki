@@ -150,6 +150,21 @@
 - cache miss 时调文件系统 readpage 回调读磁盘
 - 同一文件多次读只读一次磁盘
 
+---
+
+**专题：f2fs（Flash-Friendly File System）**
+状态：已完成
+
+### f2fs 内容
+
+- 设计目标：针对 NAND Flash 优化，减少写放大
+- 追加写（Log-structured）：不原地更新，旧数据标记无效
+- 磁盘布局：Segment(2MB)/Section/Zone 三级结构，CP/SIT/NAT/SSA 元数据区
+- NAT（Node Address Table）：节点 ID → 物理块号映射，适应追加写
+- Node/Data 分离 + 冷热分类（Hot/Warm/Cold）：6 个写入头
+- Checkpoint：定期快照保证一致性（vs ext4 journal 每次操作记录）
+- Garbage Collection：贪心/代价效益策略回收无效块
+
 ### 阶段 3 内容规划
 
 **3-1：回顾与自测**
@@ -303,3 +318,4 @@ struct deadline_data {
 | 2026-05-18 | 阶段9-第4节 | ext4生成bio：iomap框架三层结构（ext4_map_blocks→struct iomap→bio）、ext4_iomap_begin衔接回调、buffered read（readahead阶段同步生成bio）、buffered write（writeback异步生成bio）、DIO（直接挂用户page同步等待completion）、HOLE填零安全保证 |
 | 2026-05-20 | 综合复习 | 阶段1-9全面复习（5轮30题）：bio/block层、调度器/多队列、完整I/O路径、NVMe、ext4。薄弱点已巩固：bio/request生成层级、mq-deadline 4队列组合、buffered read路径顺序、前台/后台回写区别、DMA写入目标 |
 | 2026-05-20 | VFS专题 | VFS概述（统一接口层）、四大核心对象（superblock/inode/dentry/file）、函数指针多态（file_operations等三套操作表）、Page Cache机制（VFS层通用缓存，address_space连接文件系统readpage回调） |
+| 2026-05-20 | f2fs专题 | f2fs设计目标（NAND Flash优化/减少写放大）、追加写机制、磁盘布局（Segment/Section/Zone+CP/SIT/NAT/SSA）、NAT映射、Node/Data分离+冷热6头写入、Checkpoint机制（vs ext4 journal对比）、Garbage Collection（贪心/代价效益策略） |
