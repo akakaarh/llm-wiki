@@ -17,6 +17,9 @@
 - [$ATK_DLMP157_GettingStarted.md](sources/$ATK_DLMP157_GettingStarted.md) — 正点原子 STM32MP157 快速上手：开箱、硬件资源、串口设置、系统烧写、30个功能测试
 - [$MP157_M4_CubeIDE.md](sources/$MP157_M4_CubeIDE.md) — M4 裸机 CubeIDE 开发指南：27章，环境搭建、GPIO/UART/Timer/SPI/I2C/ADC/DMA 外设实验
 - [$MP157_M4_HAL.md](sources/$MP157_M4_HAL.md) — M4 裸机 HAL 库开发指南：34章，HAL/LL 库架构、外设 API、回调机制
+- [$MP157_IPC_RPMSG.md](sources/$MP157_IPC_RPMSG.md) — STM32MP1 异核通信指南：OpenAMP 框架、RPMSG 通信、虚拟串口、资源分配、RemoteProc 驱动
+- [$MP157_Linux_Driver_Guide.md](sources/$MP157_Linux_Driver_Guide.md) — STM32MP1 Linux 驱动开发指南：55+章，系统移植(TF-A/U-Boot/内核) + 全外设驱动(GPIO/I2C/SPI/LCD/USB/CAN/WiFi等)
+- [$Buildroot_UserManual.md](sources/$Buildroot_UserManual.md) — Buildroot 用户手册中文版：26章，入门/配置/使用/定制/软件包开发/调试/贡献
 
 ## 实体 (@)
 
@@ -46,4 +49,4 @@
 
 ---
 
-最后更新：2026-05-23
+最后更新：2026-05-24

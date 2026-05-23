@@ -66,3 +66,21 @@
 - 新建 $ 摘要：$MP157_M4_CubeIDE.md（27章，环境搭建、GPIO/UART/Timer/SPI/I2C/ADC/DMA 外设实验）
 - 新建 $ 摘要：$MP157_M4_HAL.md（34章，HAL/LL 库架构、外设 API、回调机制）
 - 更新 index.md
+
+## [2026-05-24] ingest | STM32MP1 嵌入式 Linux 驱动开发指南
+
+- 来源：`09\STM32MP1嵌入式Linux驱动开发指南V2.0.pdf`（1549页，55+章）
+- 新建 $ 摘要：$MP157_Linux_Driver_Guide.md（三篇：Ubuntu入门、系统移植TF-A/U-Boot/内核、ARM Linux驱动开发全外设实验）
+- 更新 index.md
+
+## [2026-05-24] ingest | Buildroot 用户手册中文版
+
+- 来源：`10\Buildroot用户手册中文版(正点原子翻译)_V1.0.pdf`
+- 新建 $ 摘要：$Buildroot_UserManual.md（26章，入门、配置、使用、定制、软件包开发、调试、贡献）
+- 更新 index.md
+
+## [2026-05-24] ingest | STM32MP1 异核通信指南（RPMSG + OpenAMP）
+
+- 来源：`09\STM32MP1异核通信(基于CubeIDE) V1.1.pdf`（206页）
+- 新建 $ 摘要：$MP157_IPC_RPMSG.md（7章，OpenAMP配置、资源分配、IPCC框架、RemoteProc驱动、RPMSG通信、虚拟串口、低功耗唤醒）
+- 更新 index.md
