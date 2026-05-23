@@ -325,7 +325,11 @@ package/<company>/
 
 ### 11 已知问题
 
-列出当前版本的已知问题和限制。
+当前版本存在以下已知问题和限制：
+
+- **BR2_TARGET_LDFLAGS 中的 $ 符号问题**：如果选项包含 `$` 符号，则无法通过 `BR2_TARGET_LDFLAGS` 传递额外的链接器选项。例如，以下内容将被打断：`BR2_TARGET_LDFLAGS="-Wl,-rpath='$ORIGIN/../lib'"`
+- **libffi 架构限制**：SuperH 2 和 ARC 体系架构不支持 libffi 软件包
+- **prboom 编译器故障**：prboom 软件包使用 Sourcery CodeBench 2012.09 版本的 SuperH 4 编译器会触发编译器故障
 
 ### 12 法律声明和许可
 
@@ -352,11 +356,25 @@ package/<company>/
 
 ### 14 Buildroot 如何工作
 
-Buildroot 的核心工作流程：
-1. 解析配置（.config）
-2. 下载源码
-3. 提取、打补丁、配置、编译、安装各软件包
-4. 生成根文件系统镜像
+Buildroot 基本上是一组 Makefile 文件，可以使用正确的选项来对所需软件进行下载、配置和编译。它还包含各种软件包的补丁——主要是那些涉及交叉编译工具链（gcc、binutils 和 uClibc）的软件包。每个软件包基本上只有一个 Makefile 文件，它们以 `.mk` 扩展名命名。
+
+**目录结构**：
+- `toolchain/` — 包含与交叉编译工具链相关的所有软件的 Makefile 和相关文件：binutils、gcc、gdb、kernel-header 和 uClibc
+- `arch/` — 包含 Buildroot 支持的所有处理器体系架构的定义
+- `package/` — 包含所有用户空间工具和库的 Makefile 和相关文件，每个软件包都有一个子目录
+- `linux/` — 包含 Linux 内核的 Makefile 和相关文件
+- `boot/` — 包含 Buildroot 支持的 Bootloader 的 Makefile 和相关文件
+- `system/` — 包含对系统集成的支持，例如目标文件系统框架 skeleton 和 init 系统的选择
+- `fs/` — 包含与生成目标根文件系统镜像有关的软件的 Makefile 和相关文件
+
+每个目录至少包含 2 个文件：
+- `something.mk` — 用于下载、配置、编译和安装软件包 something 的 Makefile
+- `Config.in` — 配置工具描述文件的一部分，描述与软件包有关的选项
+
+**主 Makefile 执行步骤**（一旦配置完成）：
+1. 创建所有输出目录：staging、target、build 等（默认在 `output/` 目录中，可以使用 `O=` 来指定另一个路径）
+2. 生成工具链目标。当使用内部工具链时，这意味着将生成交叉编译工具链；当使用外部工具链时，这意味着将检查外部工具链的功能并将其导入到 Buildroot 环境
+3. 生成 `TARGETS` 变量中列出的所有目标。该变量由所有单个组件的 Makefile 填充。生成这些目标将触发用户空间软件包（库、程序集）、内核、引导加载程序的编译以及根文件系统镜像的生成，具体取决于配置
 
 ### 15 编码风格
 
@@ -376,10 +394,23 @@ Buildroot 的核心工作流程：
 
 ### 16 添加对特定硬件板的支持
 
-- 在 `board/<company>/<boardname>/` 下创建板级配置
-- 在 `configs/` 下创建 defconfig 文件
-- 包含内核配置、bootloader 配置、post-build/post-image 脚本等
-- 可选择使用 br2-external 机制
+Buildroot 包含了一些公开可用的硬件板的基本配置，欢迎您为 Buildroot 添加对其他硬件板的支持。
+
+**创建 defconfig 文件的步骤**：
+1. 创建一个常规的 Buildroot 配置来为硬件建立一个基本系统：（内部）工具链、内核、引导加载程序、文件系统和一个简单的只有 BusyBox 的用户空间。不应选择特定的软件包：配置应尽可能少
+2. 运行 `make savedefconfig`，这将在 Buildroot 根目录下生成一个最小的 defconfig 文件
+3. 将此文件移动到 `configs/` 目录中，并将其重命名为 `<boardname>_defconfig`
+4. 如果配置有些复杂，则最好手动将它重新格式化并分成几个部分，且在每部分前面添加对应的注释。典型部分是 Architecture、Toolchain options（通常只是 linux header 版本）、Firmware、Bootloader、Kernel 和 Filesystem
+
+**版本控制要求**：
+- 对于不同的组件，请始终使用固定的版本或 commit 哈希值，而不是 "latest" 版本
+- 例如，设置 `BR2_LINUX_KERNEL_CUSTOM_VERSION=y` 和设置 `BR2_LINUX_KERNEL_CUSTOM_VERSION_VALUE` 为您所测试的内核版本
+- 建议尽量使用 Linux 内核和 bootloader 的上游版本，并尽量使用内核和 bootloader 的默认配置
+
+**板级目录结构**：
+- 创建目录 `board/<manufacturer>` 和子目录 `board/<manufacturer>/<boardname>`
+- 在这些目录中存储补丁程序和配置，并从 Buildroot 主配置中引用它们
+- 可选择使用 br2-external 机制将板级配置保留在 Buildroot 源码树之外
 
 ### 17 向 Buildroot 添加新软件包
 
@@ -432,7 +463,67 @@ Buildroot 的核心工作流程：
 
 **17.6 基于 autotools 的软件包**：继承 generic-package，自动处理 ./configure/make/make install
 
+17.6.1 tutorial 示例：
+```makefile
+LIBFOO_VERSION = 1.0
+LIBFOO_SOURCE = LIBFOO-$(LIBFOO_VERSION).tar.gz
+LIBFOO_SITE = http://www.foosoftware.org/download
+LIBFOO_INSTALL_STAGING = YES
+LIBFOO_INSTALL_TARGET = NO
+LIBFOO_CONF_OPTS = --disable-shared
+LIBFOO_DEPENDENCIES = libglib2 host-pkgconf
+
+$(eval $(autotools-package))
+```
+
+17.6.2 autotools 特有变量：
+- `LIBFOO_SUBDIR` — 指定包含软件包配置脚本的子目录名称
+- `LIBFOO_CONF_ENV` — 指定传递给配置脚本的其他环境变量
+- `LIBFOO_CONF_OPTS` — 指定传递给配置脚本的其他配置选项
+- `LIBFOO_MAKE` — 指定备用 make 命令，不支持并行构建时设置为 `$(MAKE1)`
+- `LIBFOO_MAKE_ENV` — 指定在构建步骤中传递给 make 命令的其他环境变量
+- `LIBFOO_MAKE_OPTS` — 指定在构建步骤中传递给 make 命令的其他变量
+- `LIBFOO_AUTORECONF` — 是否自动重新配置软件包（YES/NO），默认 NO
+- `LIBFOO_AUTORECONF_ENV` — 传递给 autoreconf 程序的其他环境变量
+- `LIBFOO_AUTORECONF_OPTS` — 传递给 autoreconf 程序的其他配置选项
+- `LIBFOO_GETTEXTIZE` — 是否对该软件包进行 gettext 化（YES/NO），仅在 AUTORECONF=YES 时有效
+- `LIBFOO_LIBTOOL_PATCH` — 是否应用可修复 libtool 交叉编译问题的 Buildroot 补丁程序（YES/NO），默认 YES
+- `LIBFOO_INSTALL_STAGING_OPTS` — 安装到 staging 目录的 make 选项，默认 `DESTDIR=$(STAGING_DIR) install`
+- `LIBFOO_INSTALL_TARGET_OPTS` — 安装到 target 目录的 make 选项，默认 `DESTDIR=$(TARGET_DIR) install`
+
 **17.7 基于 CMake 的软件包**：继承 generic-package，使用 cmake 构建系统
+
+17.7.1 tutorial 示例：
+```makefile
+LIBFOO_VERSION = 1.0
+LIBFOO_SOURCE = LIBFOO-$(LIBFOO_VERSION).tar.gz
+LIBFOO_SITE = http://www.foosoftware.org/download
+LIBFOO_INSTALL_STAGING = YES
+LIBFOO_INSTALL_TARGET = NO
+LIBFOO_CONF_OPTS = -DBUILD_DEMOS=ON
+LIBFOO_DEPENDENCIES = libglib2 host-pkgconf
+
+$(eval $(cmake-package))
+```
+
+17.7.2 cmake 特有变量：
+- `LIBFOO_SUBDIR` — 指定包含软件包主 CMakeLists.txt 文件的子目录名称
+- `LIBFOO_CONF_ENV` — 指定传递给 CMake 的其他环境变量
+- `LIBFOO_CONF_OPTS` — 指定传递给 CMake 的其他配置选项
+- `LIBFOO_SUPPORTS_IN_SOURCE_BUILD` — 当软件包无法在源码目录树中构建时设置为 NO
+- `LIBFOO_MAKE` — 指定备用 make 命令，不支持并行构建时设置为 `$(MAKE1)`
+- `LIBFOO_MAKE_ENV` — 指定在构建步骤中传递给 make 命令的其他环境变量
+- `LIBFOO_MAKE_OPTS` — 指定在构建步骤中传递给 make 命令的其他变量
+- `LIBFOO_INSTALL_STAGING_OPTS` — 安装到 staging 目录的 make 选项，默认 `DESTDIR=$(STAGING_DIR) install`
+- `LIBFOO_INSTALL_TARGET_OPTS` — 安装到 target 目录的 make 选项，默认 `DESTDIR=$(TARGET_DIR) install`
+
+cmake-package 基础结构自动设置的常见 CMake 选项（通常无需手动设置）：
+- `CMAKE_BUILD_TYPE` — 由 `BR2_ENABLE_DEBUG` 驱动
+- `CMAKE_INSTALL_PREFIX` — 自动设置
+- `BUILD_SHARED_LIBS` — 由 `BR2_STATIC_LIBS` 驱动
+- `BUILD_DOC`、`BUILD_DOCS` — 已禁用
+- `BUILD_EXAMPLE`、`BUILD_EXAMPLES` — 已禁用
+- `BUILD_TEST`、`BUILD_TESTS`、`BUILD_TESTING` — 已禁用
 
 **17.8 Python 软件包**：
 - 支持 distutils 和 setuptools
@@ -492,17 +583,68 @@ Buildroot 的核心工作流程：
 
 ### 19 下载基础结构
 
-- 支持多种下载方式：wget、git、svn、hg、bazaar、cvs
-- `BR2_DL_DIR` 设置下载目录
-- 支持镜像站点（`BR2_PRIMARY_SITE`）
-- 支持本地文件系统镜像
+**下载方法**（`FOO_SITE_METHOD`）：
+- `wget` — 用于压缩包的常规 FTP/HTTP 下载，当 `FOO_SITE` 以 `http://`、`https://` 或 `ftp://` 开头时默认使用
+- `scp` — 使用 scp 通过 SSH 方式下载压缩包，当 `FOO_SITE` 以 `scp://` 开头时默认使用，URL 格式为 `scp://[user@]host:filepath`
+- `svn` — 用于从 Subversion 仓库下载
+- `git` — 用于从 Git 仓库下载
+- `hg` — 用于从 Mercurial 仓库下载
+- `bazaar` — 用于从 Bazaar 仓库下载
+- `cvs` — 用于从 CVS 仓库下载
+- `file` — 用于本地文件系统路径
+
+**关键变量**：
+- `BR2_DL_DIR` — 设置下载目录，默认为 `dl/`
+- `FOO_SITE` — 指定软件包源码的下载位置，支持 HTTP/FTP URL、Git/SVN 仓库 URL、本地文件系统路径
+- `FOO_SITE_METHOD` — 显式指定下载方法（通常可由 URL 自动推断）
+- `FOO_DL_OPTS` — 以空格分隔的传递给下载器的其他选项列表
+- `FOO_EXTRA_DOWNLOADS` — 以空格分隔的 Buildroot 应下载的其他文件列表
+
+**镜像站点支持**：
+- `BR2_PRIMARY_SITE` — 指定主镜像站点 URL，Buildroot 会优先从该站点下载
+- `BR2_BACKUP_SITE` — 指定备用镜像站点 URL，当主站点不可用时使用
+- 支持本地文件系统镜像，可用于离线构建
 
 ### 20 调试 Buildroot
 
-- `make V=1` 显示详细命令
-- `make V=2` 显示更多调试信息
+**基本调试方法**：
+- `make V=1` — 显示所有执行的命令
+- `make V=2` — 显示更多调试信息
 - 检查 `output/build/<pkg>/.stamp_*` 文件了解构建进度
 - 查看 `output/build/<pkg>/build.log` 获取构建日志
+
+**构建步骤检测**（`BR2_INSTRUMENTATION_SCRIPTS`）：
+
+定义 `BR2_INSTRUMENTATION_SCRIPTS` 变量，指定您想要在每个步骤之前和之后调用的一个或多个脚本（或其他可执行文件）的路径，以空格分隔。这些脚本按顺序调用，带有三个参数：
+- `start` 或 `end`，表示步骤的开始或结束
+- 即将开始或刚刚结束的步骤的名称
+- 软件包的名称
+
+使用方式：
+```bash
+make BR2_INSTRUMENTATION_SCRIPTS="/path/to/my/script1 /path/to/my/script2"
+```
+
+**可检测的步骤列表**：
+- `extract` — 解压
+- `patch` — 打补丁
+- `configure` — 配置
+- `build` — 编译
+- `install-host` — 安装到 host 目录
+- `install-target` — 安装到 target 目录
+- `install-staging` — 安装到 staging 目录
+- `install-image` — 安装到 binaries 目录
+
+**脚本可访问的环境变量**：
+- `BR2_CONFIG` — Buildroot .config 文件的路径
+- `HOST_DIR`、`STAGING_DIR`、`TARGET_DIR` — 各输出目录路径
+- `BUILD_DIR` — 软件包的提取和构建目录
+- `BINARIES_DIR` — 所有二进制文件（镜像）的存储位置
+- `BASE_DIR` — 基本输出目录
+
+**构建时间分析**：
+- `make graph-build` — 生成构建持续时间图（需 python-matplotlib 和 python-numpy）
+- `BR2_GRAPH_OUT` — 图表输出格式（pdf/png）
 
 ### 21 为 Buildroot 做贡献
 
@@ -533,19 +675,111 @@ Buildroot 的核心工作流程：
 **21.6 报告 issues/bugs 或获取帮助**
 
 **21.7 使用 run-tests 框架**：
-- **21.7.1 创建测试用例**
-- **21.7.2 调试测试用例**
+
+Buildroot 包含一个运行时测试框架，称为 run-tests，它建立在 Python 脚本和 QEMU 运行时执行的基础上。该框架有两种类型的测试用例：一种用于构建时测试，另一种用于具有 QEMU 依赖性的运行时测试。
+
+框架目标：
+- 构建一个定义明确的配置
+- 可选项，验证构建输出的某些属性
+- 如果是运行时测试：在 QEMU 下启动，运行测试条件以验证功能是否正常运行
+
+常用命令：
+- `support/testing/run-tests -h` — 查看帮助和所有选项
+- `support/testing/run-tests -l` — 列出所有测试用例
+- 设置下载文件夹（`-d`）、输出文件夹（`-o`）、保留构建输出（`-k`）、JLEVEL 等
+
+运行测试用例示例：
+```bash
+# 列出所有测试
+support/testing/run-tests -l
+
+# 运行单个测试并保留输出（需加 sudo）
+sudo support/testing/run-tests -d dl -o output_folder -k tests.init.test_busybox.TestInitSystemBusyboxRw
+```
+
+**21.7.1 创建测试用例**：
+
+熟悉如何创建测试用例的最好方法是查看 `support/testing/tests/fs/` 和 `support/testing/tests/init/` 的测试脚本。默认情况下，测试用例使用 br-arm-full-* uClibc-ng 工具链和 armv5/7 cpu 的预构建内核。
+
+基本的测试用例定义涉及：
+- 创建一个新的测试文件
+- 定义唯一的测试类别
+- 确定是否可以使用默认的 defconfig plus 测试选项
+- 实现 `def test_run(self):` 函数，可选性启动模拟器并提供测试用例条件
+
+额外步骤：
+- 将自己添加到 DEVELOPERS 文件中以维护该测试用例
+- 通过执行 `make .gitlab-ci.yml` 来更新 Gitlab CI yml
+
+**21.7.2 调试测试用例**：
+
+测试框架由 `support/testing/` 顶层中的 conf、infra 和 tests 文件夹组成。所有测试用例都位于 tests 文件夹下，由不同的文件夹组织，代表不同的测试类别。
+
+调试步骤：
+1. 使用 `-d`（dl 文件夹）、`-o`（输出文件夹）、`-k`（保留输出）参数运行测试
+2. 成功构建后，output_folder 将包含一个 `<test name>` 文件夹，其中包含 Buildroot 构建组件、构建日志和运行时日志
+3. 如果构建失败，控制台将显示失败阶段（setup/build/run），可检查 build/run 日志
+4. 运行时日志的前几行会捕获 QEMU 启动命令，允许进行增量测试而无需重新运行 run-tests
+
+调试技巧：
+```bash
+# 查看构建和运行日志
+ls output_folder/TestInitSystemBusyboxRw/
+# TestInitSystemBusyboxRw-build.log
+# TestInitSystemBusyboxRw-run.log
+
+# 可直接修改 output_folder 中的源码，重新运行标准 make 目标，然后重新测试
+# 这比添加补丁文件、删除输出目录重新开始更快
+```
+
+这些运行时测试由 Buildroot Gitlab CI 基础结构定期执行（参见 `.gitlab.yml`）。
 
 ### 22 DEVELOPERS 文件和 get-developers
 
-- `DEVELOPERS` 文件维护软件包的负责人信息
-- `utils/get-developers` 工具查找补丁对应的开发者
+Buildroot 主目录中包含一个名为 `DEVELOPERS` 的文件，该文件列出了涉及 Buildroot 不同领域的开发人员。
+
+**DEVELOPERS 文件的用途**：
+- 通过分析补丁并将修改后的文件与相关的开发人员进行匹配，计算出应向其发送补丁的开发人员列表
+- 查找哪些开发人员正在处理给定的体系架构或软件包，以便在此体系架构或软件包发生构建失败时可以通知他们（通过与 Buildroot 的 autobuild 基础结构交互）
+
+**要求**：开发人员在向 Buildroot 添加新的软件包、新的板子或者新的功能时，应将自身注册到 DEVELOPERS 文件中，并在补丁中包含对 DEVELOPERS 文件的适当修改。
+
+**`utils/get-developers` 工具用法**：
+- `utils/get-developers <patch1> <patch2>...` — 传递一个或几个补丁作为命令行参数时，返回适当的 `git send-email` 命令
+- `utils/get-developers -e <patch>` — 仅以适合 `git send-email --cc-cmd` 的格式打印电子邮件地址
+- `utils/get-developers -a <arch>` — 返回负责给定体系架构的开发人员列表
+- `utils/get-developers -p <package>` — 返回负责给定软件包的开发人员列表
+- `utils/get-developers -c` — 查看 Buildroot 存储库中版本控制下的所有文件，列出未被任何开发人员处理的文件（用于帮助完成 DEVELOPERS 文件）
+- `utils/get-developers`（不带参数）— 验证 DEVELOPERS 文件的完整性，并为不匹配的项目提示警告
 
 ### 23 发布工程
 
-**23.1 发布**：每 3 个月发布一次，版本号 YYYY.MM
+**23.1 发布**：
 
-**23.2 开发**：开发周期约 3 个月，包含 RC 版本
+Buildroot 项目按季度发布，每月发布错误修复版本（bugfix releases）。每年的第一个版本是长期支持版本（LTS）。
+
+- **季度发布版本**：2020.02、2020.05、2020.08、2020.11
+- **错误修复版本**：2020.02.1、2020.02.2、…
+- **LTS 版本**：2020.02、2021.02、…
+
+**版本支持策略**：
+- 发布版本受支持，直到下一个版本的第一个错误修复版本发布。例如，当 2020.08.1 发布时，2020.05.x 即为 EOL
+- LTS 版本受支持，直到下一个 LTS 版本的第一个错误修复版本发布。例如，2020.02.x 版本受支持，直到 2021.02.1 版本发布
+
+**23.2 开发周期**：
+
+每个发布周期由以下阶段组成：
+1. **开发阶段**（2 个月）：在 master 主分支上进行新功能开发
+2. **稳定化阶段**（1 个月）：在发布之前进行，不会将任何新功能添加到 master 分支中，仅会修复错误
+
+**RC（Release Candidate）流程**：
+- 稳定化阶段从标记 `rc1` 开始
+- 每周都会对另一个候选发布版本进行标记，直到发布为止
+- 例如：2020.08-rc1、2020.08-rc2、…、2020.08
+
+**next 分支机制**：
+- 为了在稳定化阶段处理新功能和版本变更，可以为这些功能创建一个 `next` 分支
+- 在当前版本发布后，`next` 分支会合并到 master 主分支中，并在那里继续下一个版本的开发周期
 
 ---
 

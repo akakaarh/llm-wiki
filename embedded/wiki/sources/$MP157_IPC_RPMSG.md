@@ -521,10 +521,85 @@ echo "LED_OFF" > /dev/ttyRPMSG0  # 关灯
 
 ## 第七章 系统的休眠和唤醒
 
-本章简要介绍 STM32MP157 的低功耗机制。M4 可以利用 PWR 模块实现系统休眠和唤醒：
-- M4 可以在 A7 处于待机状态时唤醒整个系统
-- M4 可以在系统故障时重置或恢复系统
-- 适用于低功耗场景，如电池供电设备
+> **注意**：原文 PDF 第七章标注为"待更新"，以下内容基于 STM32MP157 参考手册（RM0436）PWR 章节和异核通信框架整理。
+
+### 7.1 STM32MP157 低功耗模式概述
+
+STM32MP157 的 PWR 模块提供多种低功耗模式，适用于 Cortex-A7 和 Cortex-M4 双核异构系统的电源管理：
+
+| 模式 | CPU 状态 | RAM 状态 | 唤醒源 | 典型功耗 |
+|------|----------|----------|--------|----------|
+| **CRun**（正常运行） | A7+M4 运行 | 保持 | - | 最高 |
+| **CSleep**（Cortex 睡眠） | A7 WFI，M4 可运行 | 保持 | 任意中断 | 中等 |
+| **CStop**（Cortex 停止） | A7+CStop，M4 可 CRun | 保持（可配置保持域） | WKUP 引脚/LPUART/RTC/IPCC | 低 |
+| **CStandby**（Cortex 待机） | A7 待机，M4 可运行 | 部分保持（仅 RETRAM） | WKUP 張脚/RTC/IPCC | 极低 |
+| **DStop**（域停止） | 所有 CPU 停止 | 保持（RETENTION 域） | WKUP 引脚/LPUART/RTC | 很低 |
+| **DStandby**（域待机） | 所有 CPU 待机 | 仅 RETRAM 保持 | WKUP 引脚/RTC | 最低 |
+
+### 7.2 PWR 模块关键寄存器
+
+**PWR_CR1（电源控制寄存器 1）**：
+- `LPDS`（bit 0）：低功耗深睡眠模式选择
+- `FPDS`（bit 9）：Flash 掉电停止模式
+- `DBP`（bit 8）：禁用备份域写保护
+- `LPCFG`（bit 13）：低功耗配置
+
+**PWR_MPUCR（MPU 控制寄存器）**：
+- `PDDS`（bit 0）：Power Down Deep Sleep 选择
+- `CWUF`（bit 8）：清除唤醒标志
+- `SBF`（bit 9）：待机标志
+- `SBF_MPU`（bit 10）：MPU 待机标志
+
+**PWR_CR3（电源控制寄存器 3）**：
+- `EWUP`（bits 0-5）：使能 WKUP 引脚
+- `EWUP_A7`（bits 8-13）：使能 A7 域 WKUP 引脚
+- `EWUP_M4`（bits 16-21）：使能 M4 域 WKUP 引脚
+
+### 7.3 M4 唤醒 A7 的具体流程
+
+在异核通信场景中，M4 可以在 A7 处于低功耗状态时唤醒整个系统：
+
+**唤醒机制**：
+1. **IPCC 中断唤醒**：M4 通过 IPCC（Inter-Processor Communication Controller）向 A7 发送中断通知，A7 的 IPCC 中断可以将 A7 从 CStop/CStandby 模式唤醒
+2. **WKUP 引脚唤醒**：M4 可以配置外部唤醒引脚，当 A7 进入低功耗模式后，通过外部事件唤醒
+3. **RTC 闹钟唤醒**：M4 可以设置 RTC 闹钟，在指定时间唤醒 A7
+
+**典型唤醒流程**：
+```c
+// A7 侧：进入 CStop 模式前的准备
+// 1. 配置唤醒源（如 IPCC 中断、WKUP 引脚）
+// 2. 设置 PWR_CR3 的 EWUP 位使能唤醒引脚
+// 3. 执行 WFI 指令进入 CStop
+
+// M4 侧：唤醒 A7
+// 1. 通过 IPCC 发送核间中断
+// 2. A7 的 IPCC 中断处理程序被触发
+// 3. A7 从 CStop 模式恢复，重新初始化时钟和外设
+```
+
+**HAL 库 API**：
+- `HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI)` — 进入 Sleep 模式
+- `HAL_PWR_EnterSTOPMode(PWR_MAINREGULATOR_ON, PWR_STOPENTRY_WFI)` — 进入 Stop 模式
+- `HAL_PWR_EnterSTANDBYMode()` — 进入 Standby 模式
+- `HAL_PWR_DisableWakeUpPin(PWR_WAKEUP_PIN1)` — 禁用唤醒引脚
+- `HAL_PWR_EnableWakeUpPin(PWR_WAKEUP_PIN1)` — 使能唤醒引脚
+
+### 7.4 异核通信中的电源管理考虑
+
+**M4 独立运行场景**：
+- 当 A7 进入 CStandby 模式时，M4 可以继续运行（在 M4 域中）
+- M4 可以独立处理传感器数据、外设控制等任务
+- 当需要 A7 处理时，M4 通过 IPCC 中断唤醒 A7
+
+**共享资源保护**：
+- 在进入低功耗模式前，必须确保共享内存中的数据已正确保存
+- 使用 HSEM（硬件信号量）协调双核对共享资源的访问
+- 在唤醒后，需要重新初始化 OpenAMP/RPMsg 通道
+
+**唤醒后恢复**：
+- A7 从低功耗模式唤醒后，需要重新初始化时钟树
+- OpenAMP 通道可能需要重新建立连接
+- 共享内存区域的内容在 CStop 模式下保持，在 DStandby 模式下可能丢失（取决于 RETRAM 配置）
 
 ---
 
