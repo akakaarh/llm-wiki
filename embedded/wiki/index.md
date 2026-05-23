@@ -15,6 +15,8 @@
 - [$CortexA_ProgrammersGuide.md](sources/$CortexA_ProgrammersGuide.md) — ARM Cortex-A 系列程序员指南 DEN0013D，涵盖处理器模式、指令集、Cache、MMU、TrustZone、NEON
 - [$ARMv7M_RefManual.md](sources/$ARMv7M_RefManual.md) — ARMv7-M 架构参考手册 DDI0403E，覆盖 Cortex-M1/M3/M4/M7，NVIC、MPU、异常模型
 - [$ATK_DLMP157_GettingStarted.md](sources/$ATK_DLMP157_GettingStarted.md) — 正点原子 STM32MP157 快速上手：开箱、硬件资源、串口设置、系统烧写、30个功能测试
+- [$MP157_M4_CubeIDE.md](sources/$MP157_M4_CubeIDE.md) — M4 裸机 CubeIDE 开发指南：27章，环境搭建、GPIO/UART/Timer/SPI/I2C/ADC/DMA 外设实验
+- [$MP157_M4_HAL.md](sources/$MP157_M4_HAL.md) — M4 裸机 HAL 库开发指南：34章，HAL/LL 库架构、外设 API、回调机制
 
 ## 实体 (@)
 

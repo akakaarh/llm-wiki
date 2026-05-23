@@ -59,3 +59,10 @@
 - 来源：`E:\资料\STM32MP157\【正点原子】STM32MP157开发板（A盘）-基础资料\10\STM32MP157快速体验V1.8.pdf` + `10\STM32MP157开箱指南及维护V1.1.pdf`
 - 新建 $ 摘要：$ATK_DLMP157_GettingStarted.md（1120行，覆盖开箱、硬件资源、串口设置、系统烧写、30个功能测试、交叉编译）
 - 更新 index.md
+
+## [2026-05-24] ingest | STM32MP1 M4 裸机开发指南（CubeIDE + HAL 库）
+
+- 来源：`09\STM32MP1 M4裸机CubeIDE开发指南 V1.5.2.pdf`（1100页）+ `09\STM32MP1 M4裸机HAL库开发指南V1.2.2.pdf`（923页）
+- 新建 $ 摘要：$MP157_M4_CubeIDE.md（27章，环境搭建、GPIO/UART/Timer/SPI/I2C/ADC/DMA 外设实验）
+- 新建 $ 摘要：$MP157_M4_HAL.md（34章，HAL/LL 库架构、外设 API、回调机制）
+- 更新 index.md
