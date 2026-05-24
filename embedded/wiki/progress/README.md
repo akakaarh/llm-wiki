@@ -62,6 +62,12 @@
 **阶段 2：ARM架构基础 + RISC-V概览**
 状态：已完成
 
+**阶段 3：Cortex-M架构深入 + JTAG/SWD**
+状态：已完成（3.1~3.5 理论讲完，实操待 ST-LINK 到货后补）
+
+**阶段 4：Cortex-M外设与驱动**
+状态：进行中（4.1 GPIO 理论讲到 4.1.6，4.1.7~4.1.8 待继续）
+
 ---
 
 ## 阶段详情
@@ -131,29 +137,29 @@
 **类型：** 理论+实操 | **环境：** M4裸机（STM32MP157）
 **主要资料：** `$CortexM3M4_DefinitiveGuide.md`（架构/异常/调试/MPU）、`$MP157_M4_CubeIDE.md`（实操）、`$MP157_M4_HAL.md`（HAL库）
 
-#### 3.1 异常模型
+#### 3.1 异常模型 ✓
 - 异常类型、优先级配置、异常入口行为、EXC_RETURN、浮点懒压栈
 - **wiki 输出：** `#CortexM_ExceptionModel.md`
 - **来源：** `$CortexM3M4_DefinitiveGuide.md` Ch7（异常与中断）
 
-#### 3.2 内存映射与总线
+#### 3.2 内存映射与总线 ✓
 - 4GB地址空间布局、SCS寄存器映射、Bit-banding、AHB-AP
 - **wiki 输出：** `#CortexM_MemoryMap.md`, `#BitBanding.md`
 - **来源：** `$CortexM3M4_DefinitiveGuide.md` Ch6（内存系统，含 Bit-band 公式）
 
-#### 3.3 系统控制与配置
+#### 3.3 系统控制与配置 ✓
 - SCB关键寄存器、SysTick定时器、电源管理、时钟树基础
 - **wiki 输出：** `#CortexM_SystemControl.md`
 - **来源：** `$CortexM3M4_DefinitiveGuide.md` Ch9（低功耗与系统控制）、`$MP157_M4_CubeIDE.md` Ch9（时钟配置）、`$MP157_M4_HAL.md` Ch18/21（时钟/SysTick）
 
-#### 3.4 启动流程与链接
+#### 3.4 启动流程与链接 ✓
 - Reset Handler执行序列、向量表结构、MSP/PSP双栈指针、链接脚本、启动文件解析
 - **wiki 输出：** `#CortexM_Startup.md`
 - **来源：** `$CortexM3M4_DefinitiveGuide.md` Ch4（复位序列）、`$MP157_M4_HAL.md` Ch8（启动文件分析、分散加载文件）
 
-#### 3.5 JTAG/SWD调试基础（新增）
+#### 3.5 JTAG/SWD调试基础 ✓
 - JTAG/SWD协议概念
-- OpenOCD + ST-Link环境搭建
+- OpenOCD + ST-Link环境搭建（CMSIS-DAP HID 后端配置完成，ST-LINK 待到货）
 - GDB远程调试（断点、单步、寄存器查看）
 - **wiki 输出：** `#JTAG_SWD_Debugging.md`
 - **⚠️ 资料缺口：** 现有资料仅覆盖 CubeIDE 图形化调试（`$MP157_M4_CubeIDE.md` Ch4.3），OpenOCD+GDB 命令行调试需补充
@@ -176,10 +182,12 @@
 **类型：** 理论+实操 | **环境：** M4外设（STM32MP157）
 **主要资料：** `$MP157_M4_CubeIDE.md`（27章外设实验）、`$MP157_M4_HAL.md`（34章HAL库API）、`$STM32MP157_ReferenceManual.md`（寄存器详解）
 
-#### 4.1 GPIO 与外部中断
+#### 4.1 GPIO 与外部中断（进行中：4.1.1~4.1.6 已讲，4.1.7~4.1.8 待继续）
 - GPIO寄存器、输入/输出模式、EXTI、EXTI→NVIC连接路径
 - **wiki 输出：** `#GPIO_ExternalInterrupts.md`
 - **来源：** `$MP157_M4_CubeIDE.md` Ch10-13（GPIO输出/输入/EXTI）、`$MP157_M4_HAL.md` Ch11-19（汇编LED到EXTI）、`$STM32MP157_ReferenceManual.md` GPIO/EXTI 章节
+- **已完成：** 4.1.1 GPIO基础（8模式/寄存器/初始化流程）、4.1.2 GPIO输出（LED/推挽开漏/BSRR）、4.1.3 GPIO输入（按键/上下拉/消抖）、4.1.4 复用功能（AF编号/映射表/AFRL/AFRH）、4.1.5 矩阵键盘扫描（逐行拉低/消抖）、4.1.6 EXTI外部中断（触发方式/NVIC配置/中断服务函数/回调）
+- **待继续：** 4.1.7 中断编程实践、4.1.8 GPIO实际应用
 
 #### 4.2 通信协议
 - UART：帧格式、波特率计算、硬件流控、FIFO
@@ -423,6 +431,8 @@
 | 2026-05-18 | 阶段2-2.4~2.5 | Cortex-M与A对比（NVIC确定性vs GIC多核、MPU简单vs MMU完整、选型决策树）、RISC-V概览（开源免费/模块化ISA/3级特权/Linux支持） |
 | 2026-05-24 | 路线审视 | 基于9个来源摘要审视学习路线：阶段3/4/6资料充分，阶段5缺FreeRTOS原理，阶段7缺ftrace/eBPF，阶段8仅Buildroot有资料（缺Yocto/SecureBoot/OTA）；qmd索引更新至29文件291向量；各阶段补充资料来源标注 |
 | 2026-05-24 | 补充资料 | 下载并沉淀3份补充资料：FreeRTOS官方文档（13节，覆盖阶段5缺口）、Yocto/ST指南（覆盖阶段8 Yocto缺口）、Bootlin嵌入式Linux培训（552页，覆盖阶段7-8多项缺口）；PDF原件16个迁移到raw/assets/；qmd索引更新至32文件347向量 |
+| 2026-05-24 | 阶段3完成 | 3.1异常模型、3.2内存映射与Bit-banding、3.3系统控制（SCB/SysTick/时钟树）、3.4启动流程（MSP/PSP/链接脚本）、3.5调试（SWD/OpenOCD/CMSIS-DAP HID） |
+| 2026-05-24 | 阶段4.1部分 | 4.1.1~4.1.6 理论讲完（GPIO基础/输出/输入/AF/矩阵键盘/EXTI），4.1.7~4.1.8 待继续；实操待 ST-LINK 到货 |
 
 ---
 
