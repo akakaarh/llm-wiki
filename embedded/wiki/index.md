@@ -20,6 +20,10 @@
 - [$MP157_IPC_RPMSG.md](sources/$MP157_IPC_RPMSG.md) — STM32MP1 异核通信指南：OpenAMP 框架、RPMSG 通信、虚拟串口、资源分配、RemoteProc 驱动
 - [$MP157_Linux_Driver_Guide.md](sources/$MP157_Linux_Driver_Guide.md) — STM32MP1 Linux 驱动开发指南：55+章，系统移植(TF-A/U-Boot/内核) + 全外设驱动(GPIO/I2C/SPI/LCD/USB/CAN/WiFi等)
 - [$Buildroot_UserManual.md](sources/$Buildroot_UserManual.md) — Buildroot 用户手册中文版：26章，入门/配置/使用/定制/软件包开发/调试/贡献
+- [$STM32MP157_ReferenceManual.md](sources/$STM32MP157_ReferenceManual.md) — STM32MP157 参考手册关键章节：RCC/GPIO/USART/NVIC/GIC/EXTI/DMA/PWR/SYSCFG 寄存器详解
+- [$CortexM3M4_DefinitiveGuide.md](sources/$CortexM3M4_DefinitiveGuide.md) — Cortex-M3/M4 权威指南关键章节：架构/编程模型/异常中断/低功耗/调试/MPU
+- [$CortexA7_TRM.md](sources/$CortexA7_TRM.md) — Cortex-A7 TRM 关键章节：MMU/TLB/L1缓存/L2缓存/Generic Timer/PMU/调试
+- [$ARM_GIC_Controller.md](sources/$ARM_GIC_Controller.md) — ARM GIC 中断控制器：SGI/PPI/SPI、GICD/GICC 寄存器、优先级、虚拟化支持
 
 ## 实体 (@)
 

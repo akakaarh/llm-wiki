@@ -84,3 +84,15 @@
 - 来源：`09\STM32MP1异核通信(基于CubeIDE) V1.1.pdf`（206页）
 - 新建 $ 摘要：$MP157_IPC_RPMSG.md（7章，OpenAMP配置、资源分配、IPCC框架、RemoteProc驱动、RPMSG通信、虚拟串口、低功耗唤醒）
 - 更新 index.md
+
+## [2026-05-24] ingest | STM32MP157 参考手册 + Cortex-M3/M4 权威指南 + Cortex-A7 TRM + GIC 控制器
+
+- 来源：`07\STM32MP157参考手册.pdf`（4018页，关键章节提取）
+- 来源：`04\ARM Cortex-M3和Cortex-M4处理器权威指南(第三版).pdf`（1055页，关键章节提取）
+- 来源：`04\Cortex-A7 Technical ReferenceManua.pdf`（完整）
+- 来源：`04\ARM Generic Interrupt Controller(ARM GIC控制器)V2.0.pdf`（完整）
+- 新建 $ 摘要：$STM32MP157_ReferenceManual.md（RCC/GPIO/USART/NVIC/GIC/EXTI/DMA/PWR/SYSCFG 寄存器详解）
+- 新建 $ 摘要：$CortexM3M4_DefinitiveGuide.md（架构/编程模型/异常中断/低功耗/调试/MPU）
+- 新建 $ 摘要：$CortexA7_TRM.md（MMU/TLB/L1缓存/L2缓存/Generic Timer/PMU/调试）
+- 新建 $ 摘要：$ARM_GIC_Controller.md（SGI/PPI/SPI、GICD/GICC 寄存器、优先级、虚拟化）
+- 更新 index.md
