@@ -222,7 +222,7 @@
 #### 5.1 RTOS 基础概念
 - 任务状态模型、上下文切换、调度算法、Tick机制
 - **wiki 输出：** `#RTOS_Fundamentals.md`
-- **⚠️ 资料缺口：** 现有资料不覆盖 FreeRTOS 原理。需从 FreeRTOS 官方文档或书籍补充。STM32CubeMP1 固件包 Middlewares/Third_Party/FreeRTOS 目录下有源码可参考
+- **来源：** `$FreeRTOS_Documentation.md`（13节：任务管理/调度/队列/信号量/互斥量/事件组/任务通知/软件定时器/内存管理/配置体系/SMP多核）
 
 #### 5.2 同步与通信
 - 信号量、互斥锁、优先级继承、消息队列、事件标志组、死锁
@@ -352,7 +352,7 @@
 - BitBake基础、layer概念、recipe编写
 - BSP layer开发、定制image、SDK生成
 - **wiki 输出：** `#Yocto_BitBake.md`
-- **⚠️ 资料缺口：** 现有资料不覆盖 Yocto。`$ATK_DLMP157_GettingStarted.md` 提到出厂系统由 Yocto 编译，但无详细教程。需从 Yocto 官方文档或 Bootlin 课程补充
+- **来源：** `$Yocto_STM32MP1.md`（Yocto 概述 + ST OpenSTLinux 发行版构建 + BSP layer 开发）、`$Bootlin_EmbeddedLinux.md`（Buildroot vs Yocto 对比）
 
 #### 8.2 Buildroot
 - 配置系统（menuconfig）、自定义board定义
@@ -422,6 +422,7 @@
 | 2026-05-18 | 阶段2-2.1~2.3 | ARM架构总览（版本号/Profile/授权模式/生态）、指令集体系（ARM/Thumb-2/Interworking/寄存器模型/NEON）、Cortex-A程序员模型（7种模式/Banked寄存器/特权级/SWI系统调用/MMU两级页表/TLB） |
 | 2026-05-18 | 阶段2-2.4~2.5 | Cortex-M与A对比（NVIC确定性vs GIC多核、MPU简单vs MMU完整、选型决策树）、RISC-V概览（开源免费/模块化ISA/3级特权/Linux支持） |
 | 2026-05-24 | 路线审视 | 基于9个来源摘要审视学习路线：阶段3/4/6资料充分，阶段5缺FreeRTOS原理，阶段7缺ftrace/eBPF，阶段8仅Buildroot有资料（缺Yocto/SecureBoot/OTA）；qmd索引更新至29文件291向量；各阶段补充资料来源标注 |
+| 2026-05-24 | 补充资料 | 下载并沉淀3份补充资料：FreeRTOS官方文档（13节，覆盖阶段5缺口）、Yocto/ST指南（覆盖阶段8 Yocto缺口）、Bootlin嵌入式Linux培训（552页，覆盖阶段7-8多项缺口）；PDF原件16个迁移到raw/assets/；qmd索引更新至32文件347向量 |
 
 ---
 
@@ -435,10 +436,10 @@
 |------|--------|---------|------|
 | 3 | ★★★★☆ | `$CortexM3M4_DefinitiveGuide.md`, `$MP157_M4_CubeIDE.md`, `$MP157_M4_HAL.md` | OpenOCD+GDB 命令行调试 |
 | 4 | ★★★★★ | `$MP157_M4_CubeIDE.md`, `$MP157_M4_HAL.md`, `$STM32MP157_ReferenceManual.md` | 无 |
-| 5 | ★★★☆☆ | `$MP157_IPC_RPMSG.md`（仅核间通信） | FreeRTOS 原理（任务/调度/同步） |
+| 5 | ★★★★☆ | `$MP157_IPC_RPMSG.md`（核间通信）、`$FreeRTOS_Documentation.md`（FreeRTOS 原理） | 无 |
 | 6 | ★★★★★ | `$MP157_Linux_Driver_Guide.md`（59章） | 无 |
 | 7 | ★★★★☆ | `$CortexA7_TRM.md`, `$ARM_GIC_Controller.md`, `$MP157_Linux_Driver_Guide.md` | ftrace/eBPF 调试 |
-| 8 | ★★☆☆☆ | `$Buildroot_UserManual.md`（仅 Buildroot） | Yocto、Secure Boot/OTA |
+| 8 | ★★★★☆ | `$Buildroot_UserManual.md`、`$Yocto_STM32MP1.md`、`$Bootlin_EmbeddedLinux.md` | Secure Boot/OTA（仅概要） |
 
 ### 资料中的额外内容（未纳入学习计划）
 
@@ -453,8 +454,6 @@
 
 | 缺口 | 建议来源 |
 |------|---------|
-| FreeRTOS 原理 | FreeRTOS 官方文档 + STM32CubeMP1 固件包中的 FreeRTOS 源码 |
-| Yocto | Yocto 官方文档（6.0）或 Bootlin 课程 |
 | Secure Boot/OTA | ST Wiki（STM32MP1 Secure Boot）、SWUpdate/Mender 文档 |
 | OpenOCD+GDB | OpenOCD 官方文档 + ARM CoreSight 调试架构 |
 | ftrace/eBPF | Linux 内核文档 Documentation/trace/ |

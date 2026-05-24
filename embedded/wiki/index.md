@@ -24,6 +24,9 @@
 - [$CortexM3M4_DefinitiveGuide.md](sources/$CortexM3M4_DefinitiveGuide.md) — Cortex-M3/M4 权威指南关键章节：架构/编程模型/异常中断/低功耗/调试/MPU
 - [$CortexA7_TRM.md](sources/$CortexA7_TRM.md) — Cortex-A7 TRM 关键章节：MMU/TLB/L1缓存/L2缓存/Generic Timer/PMU/调试
 - [$ARM_GIC_Controller.md](sources/$ARM_GIC_Controller.md) — ARM GIC 中断控制器：SGI/PPI/SPI、GICD/GICC 寄存器、优先级、虚拟化支持
+- [$FreeRTOS_Documentation.md](sources/$FreeRTOS_Documentation.md) — FreeRTOS 内核官方文档：任务管理、调度机制、队列/信号量/互斥量、内存管理、软件定时器、SMP 多核
+- [$Yocto_STM32MP1.md](sources/$Yocto_STM32MP1.md) — Yocto/OpenEmbedded 构建系统：BitBake/Layer/Recipe/Image、ST OpenSTLinux 发行版、BSP layer 开发
+- [$Bootlin_EmbeddedLinux.md](sources/$Bootlin_EmbeddedLinux.md) — Bootlin 嵌入式 Linux 培训：交叉编译、U-Boot、内核配置、设备树、根文件系统、Buildroot/Yocto 对比
 
 ## 实体 (@)
 

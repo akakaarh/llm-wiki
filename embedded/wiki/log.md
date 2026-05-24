@@ -96,3 +96,22 @@
 - 新建 $ 摘要：$CortexA7_TRM.md（MMU/TLB/L1缓存/L2缓存/Generic Timer/PMU/调试）
 - 新建 $ 摘要：$ARM_GIC_Controller.md（SGI/PPI/SPI、GICD/GICC 寄存器、优先级、虚拟化）
 - 更新 index.md
+
+## [2026-05-24] ingest | 补充资料：FreeRTOS + Yocto + Bootlin
+
+- 来源：FreeRTOS 官方文档 + FreeRTOS Kernel 源码（Context7 / GitHub）
+- 来源：ST Wiki STM32MPU Distribution Package + Yocto 官方文档 v6.0
+- 来源：Bootlin Embedded Linux 培训幻灯片（552页，CC-BY-SA 3.0）
+- 新建 $ 摘要：$FreeRTOS_Documentation.md（13节：任务管理/调度/队列/信号量/互斥量/事件组/任务通知/软件定时器/内存管理/配置体系/SMP多核）
+- 新建 $ 摘要：$Yocto_STM32MP1.md（4部分：Yocto概述/ST OpenSTLinux发行版/软件版本/Secure Boot笔记）
+- 新建 $ 摘要：$Bootlin_EmbeddedLinux.md（11节：嵌入式Linux概述/交叉编译/U-Boot/内核/设备树/根文件系统/Buildroot+Yocto/应用开发/开源许可）
+- PDF 原件迁移：16个核心PDF复制到 `raw/assets/`
+- 更新 index.md
+
+## [2026-05-24] review | 学习路线审视与资料覆盖度分析
+
+- 更新 `progress/README.md`：阶段3-8各章节补充资料来源标注
+- 新增资料覆盖度总览表（5星制评分）
+- 标注资料缺口：阶段3(OpenOCD+GDB)、阶段5(FreeRTOS原理→已补充)、阶段7(ftrace/eBPF)、阶段8(Yocto→已补充/SecureBoot→部分补充)
+- 新增资料额外内容清单和待补充资料建议
+- qmd 索引更新：32文件、347向量块
