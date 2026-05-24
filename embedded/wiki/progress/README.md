@@ -129,29 +129,34 @@
 
 **目标：** 深入理解Cortex-M内部机制，掌握硬件调试基础。
 **类型：** 理论+实操 | **环境：** M4裸机（STM32MP157）
+**主要资料：** `$CortexM3M4_DefinitiveGuide.md`（架构/异常/调试/MPU）、`$MP157_M4_CubeIDE.md`（实操）、`$MP157_M4_HAL.md`（HAL库）
 
 #### 3.1 异常模型
 - 异常类型、优先级配置、异常入口行为、EXC_RETURN、浮点懒压栈
 - **wiki 输出：** `#CortexM_ExceptionModel.md`
-- **来源：** `$ARMv7M_RefManual.md` Part B
+- **来源：** `$CortexM3M4_DefinitiveGuide.md` Ch7（异常与中断）
 
 #### 3.2 内存映射与总线
 - 4GB地址空间布局、SCS寄存器映射、Bit-banding、AHB-AP
 - **wiki 输出：** `#CortexM_MemoryMap.md`, `#BitBanding.md`
+- **来源：** `$CortexM3M4_DefinitiveGuide.md` Ch6（内存系统，含 Bit-band 公式）
 
 #### 3.3 系统控制与配置
 - SCB关键寄存器、SysTick定时器、电源管理、时钟树基础
 - **wiki 输出：** `#CortexM_SystemControl.md`
+- **来源：** `$CortexM3M4_DefinitiveGuide.md` Ch9（低功耗与系统控制）、`$MP157_M4_CubeIDE.md` Ch9（时钟配置）、`$MP157_M4_HAL.md` Ch18/21（时钟/SysTick）
 
 #### 3.4 启动流程与链接
 - Reset Handler执行序列、向量表结构、MSP/PSP双栈指针、链接脚本、启动文件解析
 - **wiki 输出：** `#CortexM_Startup.md`
+- **来源：** `$CortexM3M4_DefinitiveGuide.md` Ch4（复位序列）、`$MP157_M4_HAL.md` Ch8（启动文件分析、分散加载文件）
 
 #### 3.5 JTAG/SWD调试基础（新增）
 - JTAG/SWD协议概念
 - OpenOCD + ST-Link环境搭建
 - GDB远程调试（断点、单步、寄存器查看）
 - **wiki 输出：** `#JTAG_SWD_Debugging.md`
+- **⚠️ 资料缺口：** 现有资料仅覆盖 CubeIDE 图形化调试（`$MP157_M4_CubeIDE.md` Ch4.3），OpenOCD+GDB 命令行调试需补充
 
 **实操练习（STM32MP157 M4核心）：**
 
@@ -169,24 +174,30 @@
 
 **目标：** 理解常见外设接口原理和寄存器级驱动模型。
 **类型：** 理论+实操 | **环境：** M4外设（STM32MP157）
+**主要资料：** `$MP157_M4_CubeIDE.md`（27章外设实验）、`$MP157_M4_HAL.md`（34章HAL库API）、`$STM32MP157_ReferenceManual.md`（寄存器详解）
 
 #### 4.1 GPIO 与外部中断
 - GPIO寄存器、输入/输出模式、EXTI、EXTI→NVIC连接路径
 - **wiki 输出：** `#GPIO_ExternalInterrupts.md`
+- **来源：** `$MP157_M4_CubeIDE.md` Ch10-13（GPIO输出/输入/EXTI）、`$MP157_M4_HAL.md` Ch11-19（汇编LED到EXTI）、`$STM32MP157_ReferenceManual.md` GPIO/EXTI 章节
 
 #### 4.2 通信协议
 - UART：帧格式、波特率计算、硬件流控、FIFO
 - SPI：主从模式、4种CPOL/CPHA、全双工、片选管理
 - I2C：7-bit/10-bit地址、ACK/NACK、时钟拉伸、多主仲裁
 - **wiki 输出：** `#UART_Protocol.md`, `#SPI_Protocol.md`, `#I2C_Protocol.md`
+- **来源：** `$MP157_M4_CubeIDE.md` Ch14/22-23（UART/I2C/SPI）、`$MP157_M4_HAL.md` Ch20/31（UART/I2C）、`$STM32MP157_ReferenceManual.md` USART 章节
 
 #### 4.3 定时器与PWM
 - 基本定时器、输入捕获、输出比较、PWM生成、看门狗
 - **wiki 输出：** `#Timer_PWM.md`
+- **来源：** `$MP157_M4_CubeIDE.md` Ch16-18（基本/通用/高级定时器）、`$MP157_M4_HAL.md` Ch22-25（WWDG/定时器/PWM/互补死区）
 
 #### 4.4 DMA与ADC
 - DMA通道/数据流、传输模式、循环模式、ADC基础
 - **wiki 输出：** `#DMA_Controller.md`, `#ADC_Basics.md`, `@STM32_Peripherals.md`
+- **来源：** `$MP157_M4_CubeIDE.md` Ch19-21（ADC/DAC/DMA）、`$MP157_M4_HAL.md` Ch28-30（DMA/ADC/DAC）、`$STM32MP157_ReferenceManual.md` DMA 章节
+- **额外内容：** HAL指南还覆盖 DAC（三角波/正弦波生成）、OLED显示（SSD1306）、DS18B20/DHT11 传感器，可作为选做实验
 
 **实操练习（STM32MP157 M4核心）：**
 
@@ -206,14 +217,17 @@
 
 **目标：** 理解RTOS核心概念，体验异构SoC真实工作模式。
 **类型：** 理论+实操 | **环境：** FreeRTOS on M4（STM32MP157）
+**主要资料：** `$MP157_IPC_RPMSG.md`（异核通信7章）、`$MP157_M4_HAL.md` Ch34（A7+M4联合调试）
 
 #### 5.1 RTOS 基础概念
 - 任务状态模型、上下文切换、调度算法、Tick机制
 - **wiki 输出：** `#RTOS_Fundamentals.md`
+- **⚠️ 资料缺口：** 现有资料不覆盖 FreeRTOS 原理。需从 FreeRTOS 官方文档或书籍补充。STM32CubeMP1 固件包 Middlewares/Third_Party/FreeRTOS 目录下有源码可参考
 
 #### 5.2 同步与通信
 - 信号量、互斥锁、优先级继承、消息队列、事件标志组、死锁
 - **wiki 输出：** `#RTOS_Synchronization.md`
+- **⚠️ 资料缺口：** 同上，需外部资料补充
 
 #### 5.3 内存管理与RTOS内部机制
 - 内存分配、栈大小估算、MPU任务隔离、PendSV上下文切换
@@ -221,6 +235,7 @@
 - **新增：** A7↔M4核间通信（RPMSG/共享内存）
 - FreeRTOS / Zephyr / RT-Thread 对比
 - **wiki 输出：** `#RTOS_MemoryManagement.md`, `#ContextSwitch_CortexM.md`, `!RTOS_Comparison.md`
+- **核间通信部分资料充分：** `$MP157_IPC_RPMSG.md` 覆盖 OpenAMP/Virtio/RPMsg/RemoteProc 全栈、IPCC 寄存器、资源表、共享内存分配（SRAM3 0x10040000）、虚拟串口、低功耗唤醒
 
 **实操练习（STM32MP157）：**
 
@@ -237,31 +252,38 @@
 
 **目标：** 掌握Linux驱动开发核心技能。BSP工程师的核心产出是驱动代码。
 **类型：** 理论+实操 | **环境：** A7 Linux（WSL2 + 板上）
+**主要资料：** `$MP157_Linux_Driver_Guide.md`（59章，系统移植+全外设驱动）
 
 #### 6.1 Linux设备模型
 - platform_device / platform_driver
 - 设备树匹配（of_match_table）
 - 总线-设备-驱动模型、设备属性（sysfs、uevent）
 - **wiki 输出：** `#Linux_DeviceModel.md`
+- **来源：** `$MP157_Linux_Driver_Guide.md` Ch34-37（设备树基础/中断/Pinctrl/Clock/Regulator/GPIO子系统）
 
 #### 6.2 字符设备驱动
 - cdev注册、file_operations
 - 用户空间↔内核空间数据交互、ioctl接口、并发控制
 - **wiki 输出：** `#CharDevice_Driver.md`
+- **来源：** `$MP157_Linux_Driver_Guide.md` Ch20-23（字符设备/LED/按键/中断驱动）
 
 #### 6.3 设备树实战
 - DTS语法回顾、pinctrl/clock/regulator/GPIO子系统
 - **wiki 输出：** `#DeviceTree_Practice.md`
+- **来源：** `$MP157_Linux_Driver_Guide.md` Ch34-37（设备树语法+子系统实战）
 
 #### 6.4 中断与DMA驱动
 - request_irq / threaded_irq、上半部/下半部
 - DMA API（dma_alloc_coherent、dma_map_sg）
 - **wiki 输出：** `#Interrupt_Driver.md`
+- **来源：** `$MP157_Linux_Driver_Guide.md` Ch23（中断驱动）、Ch22（并发与竞态）
 
 #### 6.5 IIO子系统与实战
 - IIO框架、ADC/传感器驱动模板、buffer与trigger
 - 综合实战：从硬件spec到完整驱动
 - **wiki 输出：** `#IIO_Framework.md`
+- **来源：** `$MP157_Linux_Driver_Guide.md` Ch54（IIO子系统）
+- **额外内容：** 资料还覆盖 PWM/INPUT/LCD/PCIe/USB/CAN/WiFi/4G 等 30+ 外设驱动，可按需扩展
 
 **实操练习（STM32MP157 A7 Linux）：**
 
@@ -281,25 +303,31 @@
 
 **目标：** 理解Cortex-A系统架构，掌握BSP开发完整流程。
 **类型：** 理论+实操 | **环境：** U-Boot/内核bring-up（STM32MP157）
+**主要资料：** `$CortexA7_TRM.md`（MMU/TLB/Cache/Generic Timer/PMU）、`$ARM_GIC_Controller.md`（GICv2完整寄存器）、`$MP157_Linux_Driver_Guide.md` Ch5-19（系统移植）、`$ATK_DLMP157_GettingStarted.md`（交叉编译）
 
 #### 7.1 Cortex-A 系统架构
 - 特权级模型（PL0/PL1/PL2）、GIC中断控制器、Cache架构、TrustZone基础
 - **wiki 输出：** `#GIC_InterruptController.md`, `#Cache_Architecture.md`, `#TrustZone_Basics.md`
+- **来源：** `$CortexA7_TRM.md`（L1/L2 Cache、Generic Timer、PMU）、`$ARM_GIC_Controller.md`（SGI/PPI/SPI、GICD/GICC 寄存器、优先级仲裁、虚拟化）、`$CortexA_ProgrammersGuide.md`（处理器模式、TrustZone）
 
 #### 7.2 启动流程
 - Boot ROM → ATF/TF-A → U-Boot → Linux内核 → init
 - 内核镜像格式、DTB加载
 - **wiki 输出：** `#SoC_BootProcess.md`
+- **来源：** `$MP157_Linux_Driver_Guide.md` Ch5（启动详解）/ Ch6-9（TF-A）/ Ch10-13（U-Boot）
 
 #### 7.3 设备树与硬件描述
 - DTS/DTB语法、设备树层级结构、pinctrl/clock/regulator子系统
 - 内核解析设备树（of_platform_populate）
 - **wiki 输出：** `#DeviceTree_Syntax.md`
+- **来源：** `$MP157_Linux_Driver_Guide.md` Ch34（设备树语法）、Ch14（U-Boot Kconfig/设备树）
 
 #### 7.4 BSP 开发工作流
 - BSP包组成、设备驱动模型、内核移植步骤
 - 交叉编译工具链、调试手段（ftrace/eBPF）
 - **wiki 输出：** `#BSP_Development.md`
+- **来源：** `$MP157_Linux_Driver_Guide.md` Ch15-17（内核Makefile/启动流程/内核移植）、`$ATK_DLMP157_GettingStarted.md` Ch6（交叉编译工具链）
+- **⚠️ 资料缺口：** ftrace/eBPF 调试手段需从其他资料补充
 
 **实操练习（STM32MP157）：**
 
@@ -318,22 +346,26 @@
 
 **目标：** 掌握Yocto/Buildroot构建系统和Secure Boot/OTA。
 **类型：** 理论+实操 | **环境：** Yocto/Buildroot（WSL2 + STM32MP157）
+**主要资料：** `$Buildroot_UserManual.md`（26章）、`$MP157_Linux_Driver_Guide.md` Ch19（Buildroot构建）
 
 #### 8.1 Yocto Project
 - BitBake基础、layer概念、recipe编写
 - BSP layer开发、定制image、SDK生成
 - **wiki 输出：** `#Yocto_BitBake.md`
+- **⚠️ 资料缺口：** 现有资料不覆盖 Yocto。`$ATK_DLMP157_GettingStarted.md` 提到出厂系统由 Yocto 编译，但无详细教程。需从 Yocto 官方文档或 Bootlin 课程补充
 
 #### 8.2 Buildroot
 - 配置系统（menuconfig）、自定义board定义
 - 与Yocto对比选型
 - **wiki 输出：** `#Buildroot.md`
+- **来源：** `$Buildroot_UserManual.md`（26章完整覆盖：入门/配置/使用/定制/软件包开发/调试/贡献）、`$MP157_Linux_Driver_Guide.md` Ch19（Buildroot 根文件系统构建实战）
 
 #### 8.3 Secure Boot与OTA
 - ARM TrustZone与Secure Boot链
 - Verified Boot（U-Boot FIT image签名）
 - OTA框架（SWUpdate/Mender/RAUC）
 - **wiki 输出：** `#SecureBoot_OTA.md`
+- **⚠️ 资料缺口：** 现有资料不覆盖 Secure Boot/OTA。`$MP157_Linux_Driver_Guide.md` Ch7 提到 TF-A 安全启动验证机制，但无完整 Secure Boot 链教程。需从 ST Wiki 或 Bootlin 课程补充
 
 **实操练习（STM32MP157）：**
 
@@ -389,7 +421,44 @@
 | 2026-05-17 | 路线升级 | 6阶段→8阶段，新增Linux设备驱动(阶段6)和构建系统与安全(阶段8)；加入STM32MP157开发板实操计划；加入RISC-V概览和Zephyr RTOS；引入双轨制学习（embedded+software单一对话框切换） |
 | 2026-05-18 | 阶段2-2.1~2.3 | ARM架构总览（版本号/Profile/授权模式/生态）、指令集体系（ARM/Thumb-2/Interworking/寄存器模型/NEON）、Cortex-A程序员模型（7种模式/Banked寄存器/特权级/SWI系统调用/MMU两级页表/TLB） |
 | 2026-05-18 | 阶段2-2.4~2.5 | Cortex-M与A对比（NVIC确定性vs GIC多核、MPU简单vs MMU完整、选型决策树）、RISC-V概览（开源免费/模块化ISA/3级特权/Linux支持） |
+| 2026-05-24 | 路线审视 | 基于9个来源摘要审视学习路线：阶段3/4/6资料充分，阶段5缺FreeRTOS原理，阶段7缺ftrace/eBPF，阶段8仅Buildroot有资料（缺Yocto/SecureBoot/OTA）；qmd索引更新至29文件291向量；各阶段补充资料来源标注 |
 
 ---
 
-最后更新：2026-05-18
+## 资料覆盖度总览（2026-05-24 审视）
+
+基于 9 个来源摘要与学习路线的对比分析。
+
+### 各阶段覆盖情况
+
+| 阶段 | 覆盖度 | 主要来源 | 缺口 |
+|------|--------|---------|------|
+| 3 | ★★★★☆ | `$CortexM3M4_DefinitiveGuide.md`, `$MP157_M4_CubeIDE.md`, `$MP157_M4_HAL.md` | OpenOCD+GDB 命令行调试 |
+| 4 | ★★★★★ | `$MP157_M4_CubeIDE.md`, `$MP157_M4_HAL.md`, `$STM32MP157_ReferenceManual.md` | 无 |
+| 5 | ★★★☆☆ | `$MP157_IPC_RPMSG.md`（仅核间通信） | FreeRTOS 原理（任务/调度/同步） |
+| 6 | ★★★★★ | `$MP157_Linux_Driver_Guide.md`（59章） | 无 |
+| 7 | ★★★★☆ | `$CortexA7_TRM.md`, `$ARM_GIC_Controller.md`, `$MP157_Linux_Driver_Guide.md` | ftrace/eBPF 调试 |
+| 8 | ★★☆☆☆ | `$Buildroot_UserManual.md`（仅 Buildroot） | Yocto、Secure Boot/OTA |
+
+### 资料中的额外内容（未纳入学习计划）
+
+| 来源 | 额外内容 | 建议 |
+|------|---------|------|
+| `$MP157_M4_CubeIDE.md` | OLED 显示（SSD1306）、AP3216C 光照传感器、DS18B20/DHT11 温湿度传感器、RNG 硬件随机数 | 可作为阶段 4 选做实验 |
+| `$MP157_M4_HAL.md` | DAC 波形生成、高级定时器互补输出/死区控制、A7+M4 联合调试（Remoteproc） | DAC/高级定时器可选做；联合调试归入阶段 5 |
+| `$ATK_DLMP157_GettingStarted.md` | WiFi Station/SoftAP/Bridge、蓝牙（文件传输/音乐）、4G 模块（pppd/ECM）、CAN FD、OV5640 摄像头、HDMI、OpenGL ES2.0 | 可作为阶段 6 驱动实战的补充素材 |
+| `$MP157_IPC_RPMSG.md` | 低功耗模式（6种）、M4 唤醒 A7 流程、IPCC 寄存器详解 | 可扩展为阶段 5 的低功耗专题 |
+
+### 待补充资料
+
+| 缺口 | 建议来源 |
+|------|---------|
+| FreeRTOS 原理 | FreeRTOS 官方文档 + STM32CubeMP1 固件包中的 FreeRTOS 源码 |
+| Yocto | Yocto 官方文档（6.0）或 Bootlin 课程 |
+| Secure Boot/OTA | ST Wiki（STM32MP1 Secure Boot）、SWUpdate/Mender 文档 |
+| OpenOCD+GDB | OpenOCD 官方文档 + ARM CoreSight 调试架构 |
+| ftrace/eBPF | Linux 内核文档 Documentation/trace/ |
+
+---
+
+最后更新：2026-05-24
