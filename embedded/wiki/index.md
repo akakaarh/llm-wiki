@@ -45,6 +45,7 @@
 - [#MMU_VirtualMemory.md](concepts/#MMU_VirtualMemory.md) — MMU 页表结构、VA→PA 转换、内存类型与访问权限
 - [#NVIC.md](concepts/#NVIC.md) — 嵌套向量中断控制器，Cortex-M 中断机制，与 GIC 对比
 - [#MPU_CortexM.md](concepts/#MPU_CortexM.md) — MPU 内存保护单元，Cortex-M 区域保护，与 MMU 对比
+- [#JTAG_SWD_Debugging.md](concepts/#JTAG_SWD_Debugging.md) — JTAG/SWD 调试：CoreSight 架构、断点类型、OpenOCD+GDB 配置、STM32MP157 JTAG 接口
 
 ## 综合 (!)
 
@@ -56,4 +57,4 @@
 
 ---
 
-最后更新：2026-05-24
+最后更新：2026-05-25
