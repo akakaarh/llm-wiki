@@ -10,6 +10,35 @@
 
 **每次新 session 开始时，第一件事是读取 `wiki/progress/README.md` 恢复进度。**
 
+## 双轨制学习
+
+本vault与 `software/` vault 采用双轨制，在同一个对话框内通过关键词切换：
+
+| 关键词 | 操作 |
+|--------|------|
+| "继续嵌入式" | 读 `embedded/wiki/progress/README.md`，接着上次继续 |
+| "切到软件" | 读 `software/wiki/progress/README.md`，接着上次继续 |
+| "记录" | 更新当前vault进度文件 + git commit |
+| "新话题" | 在当前vault里开新阶段/新专题 |
+| "新专题 XXX" | 在当前vault里创建新的独立学习专题 |
+
+**新session启动：** 读两个vault的进度文件，询问用户选择继续哪条线。
+
+## 当前学习路线（8阶段）
+
+| 阶段 | 名称 | 状态 |
+|------|------|------|
+| 1 | 嵌入式基础 | ✅ 已完成 |
+| 2 | ARM架构基础 + RISC-V概览 | 未开始 |
+| 3 | Cortex-M架构深入 + JTAG/SWD | 未开始 |
+| 4 | Cortex-M外设与驱动 | 未开始 |
+| 5 | RTOS + 核间通信 | 未开始 |
+| 6 | Linux设备驱动开发 | 未开始 |
+| 7 | Cortex-A架构与Linux BSP | 未开始 |
+| 8 | 构建系统与安全 | 未开始 |
+
+开发板：STM32MP157（阶段2-8使用）
+
 ## 目录
 
 - `raw/` — 原始文档（PDF、Markdown、网页剪藏）

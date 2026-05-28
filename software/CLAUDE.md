@@ -2,13 +2,27 @@
 
 ## 概述
 
-软件开发知识库。当前主要聚焦 Linux 内核存储 I/O 学习路径（BSP 工程师深化方向）。
+软件开发知识库。已完成 Linux 内核存储 I/O 学习路径（阶段1-9），可独立扩展新专题（MM、网络等）。
 
-## Linux 存储 I/O 学习进度
+## 学习进度
 
 进度文件：`wiki/progress/README.md`
 
 **每次新 session 开始时，第一件事是读取 `wiki/progress/README.md` 恢复进度。**
+
+## 双轨制学习
+
+本vault与 `embedded/` vault 采用双轨制，在同一个对话框内通过关键词切换：
+
+| 关键词 | 操作 |
+|--------|------|
+| "继续嵌入式" | 读 `embedded/wiki/progress/README.md`，接着上次继续 |
+| "切到软件" | 读 `software/wiki/progress/README.md`，接着上次继续 |
+| "记录" | 更新当前vault进度文件 + git commit |
+| "新话题" | 在当前vault里开新阶段/新专题 |
+| "新专题 XXX" | 在当前vault里创建新的独立学习专题 |
+
+**新session启动：** 读两个vault的进度文件，询问用户选择继续哪条线。
 
 ## 目录
 
