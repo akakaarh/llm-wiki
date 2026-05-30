@@ -1,60 +1,56 @@
 # Index
 
-> 此文件由 LLM 自动维护，不要手动编辑。
+> 此文件由 lint.py --fix 自动生成。
 
-## 学习进度
+## 来源摘要 ($)
 
-- [README.md](progress/README.md) — 嵌入式系统学习路线与进度追踪（6阶段24节）
+- [ARM Generic Interrupt Controller (GIC) Architecture Specification](sources\$ARM_GIC_Controller.md)
+- [ARMv7-M Architecture Reference Manual (DDI0403E)](sources\$ARMv7M_RefManual.md)
+- [ATK-DLMP157 快速上手指南](sources\$ATK_DLMP157_GettingStarted.md)
+- [Bootlin Embedded Linux 系统开发培训](sources\$Bootlin_EmbeddedLinux.md)
+- [Buildroot 用户手册中文版](sources\$Buildroot_UserManual.md)
+- [Cortex-A7 MPCore Technical Reference Manual（关键章节摘要）](sources\$CortexA7_TRM.md)
+- [ARM Cortex-A Series Programmer's Guide](sources\$CortexA_ProgrammersGuide.md)
+- [ARM Cortex-M3/M4 处理器权威指南 — 来源摘要](sources\$CortexM3M4_DefinitiveGuide.md)
+- [FreeRTOS 内核官方文档 — 来源摘要](sources\$FreeRTOS_Documentation.md)
+- [STM32MP1 异核通信(基于 CubeIDE)](sources\$MP157_IPC_RPMSG.md)
+- [STM32MP1 嵌入式 Linux 驱动开发指南](sources\$MP157_Linux_Driver_Guide.md)
+- [STM32MP1 M4 裸机 CubeIDE 开发指南](sources\$MP157_M4_CubeIDE.md)
+- [STM32MP1 M4 裸机 HAL 库开发指南](sources\$MP157_M4_HAL.md)
+- [STM32MP157 参考手册（关键章节摘要）](sources\$STM32MP157_ReferenceManual.md)
+- [Yocto/OpenEmbedded 构建系统（ST STM32MP1 专题）](sources\$Yocto_STM32MP1.md)
+
+## 实体 (@)
+
+- [Cortex-A 系列](entities\@CortexA_Series.md)
+- [Cortex-M 系列](entities\@CortexM_Series.md)
+
+## 概念 (#)
+
+- [ARM 指令集体系](concepts\#ARM_InstructionSets.md)
+- [计算机体系结构基础](concepts\#ComputerArchitecture_Basics.md)
+- [Cortex-A 处理器模式](concepts\#CortexA_ProcessorModes.md)
+- [数字逻辑基础](concepts\#DigitalLogic_Basics.md)
+- [嵌入式C语言](concepts\#EmbeddedC_BitManipulation.md)
+- [大小端（Endianness）](concepts\#Endianness.md)
+- [JTAG/SWD 调试基础](concepts\#JTAG_SWD_Debugging.md)
+- [MMU 与虚拟内存](concepts\#MMU_VirtualMemory.md)
+- [MPU — 内存保护单元（Cortex-M）](concepts\#MPU_CortexM.md)
+- [数制与编码](concepts\#NumberSystems_Encoding.md)
+- [NVIC — 嵌套向量中断控制器](concepts\#NVIC.md)
+
+## 综合 (!)
+
+- [Cortex-A 与 Cortex-M 对比](synthesis\!CortexA_vs_CortexM.md)
 
 ## 学习笔记
 
 暂无内容。
 
-## 来源摘要 ($)
-
-- [$CortexA_ProgrammersGuide.md](sources/$CortexA_ProgrammersGuide.md) — ARM Cortex-A 系列程序员指南 DEN0013D，涵盖处理器模式、指令集、Cache、MMU、TrustZone、NEON
-- [$ARMv7M_RefManual.md](sources/$ARMv7M_RefManual.md) — ARMv7-M 架构参考手册 DDI0403E，覆盖 Cortex-M1/M3/M4/M7，NVIC、MPU、异常模型
-- [$ATK_DLMP157_GettingStarted.md](sources/$ATK_DLMP157_GettingStarted.md) — 正点原子 STM32MP157 快速上手：开箱、硬件资源、串口设置、系统烧写、30个功能测试
-- [$MP157_M4_CubeIDE.md](sources/$MP157_M4_CubeIDE.md) — M4 裸机 CubeIDE 开发指南：27章，环境搭建、GPIO/UART/Timer/SPI/I2C/ADC/DMA 外设实验
-- [$MP157_M4_HAL.md](sources/$MP157_M4_HAL.md) — M4 裸机 HAL 库开发指南：34章，HAL/LL 库架构、外设 API、回调机制
-- [$MP157_IPC_RPMSG.md](sources/$MP157_IPC_RPMSG.md) — STM32MP1 异核通信指南：OpenAMP 框架、RPMSG 通信、虚拟串口、资源分配、RemoteProc 驱动
-- [$MP157_Linux_Driver_Guide.md](sources/$MP157_Linux_Driver_Guide.md) — STM32MP1 Linux 驱动开发指南：55+章，系统移植(TF-A/U-Boot/内核) + 全外设驱动(GPIO/I2C/SPI/LCD/USB/CAN/WiFi等)
-- [$Buildroot_UserManual.md](sources/$Buildroot_UserManual.md) — Buildroot 用户手册中文版：26章，入门/配置/使用/定制/软件包开发/调试/贡献
-- [$STM32MP157_ReferenceManual.md](sources/$STM32MP157_ReferenceManual.md) — STM32MP157 参考手册关键章节：RCC/GPIO/USART/NVIC/GIC/EXTI/DMA/PWR/SYSCFG 寄存器详解
-- [$CortexM3M4_DefinitiveGuide.md](sources/$CortexM3M4_DefinitiveGuide.md) — Cortex-M3/M4 权威指南关键章节：架构/编程模型/异常中断/低功耗/调试/MPU
-- [$CortexA7_TRM.md](sources/$CortexA7_TRM.md) — Cortex-A7 TRM 关键章节：MMU/TLB/L1缓存/L2缓存/Generic Timer/PMU/调试
-- [$ARM_GIC_Controller.md](sources/$ARM_GIC_Controller.md) — ARM GIC 中断控制器：SGI/PPI/SPI、GICD/GICC 寄存器、优先级、虚拟化支持
-- [$FreeRTOS_Documentation.md](sources/$FreeRTOS_Documentation.md) — FreeRTOS 内核官方文档：任务管理、调度机制、队列/信号量/互斥量、内存管理、软件定时器、SMP 多核
-- [$Yocto_STM32MP1.md](sources/$Yocto_STM32MP1.md) — Yocto/OpenEmbedded 构建系统：BitBake/Layer/Recipe/Image、ST OpenSTLinux 发行版、BSP layer 开发
-- [$Bootlin_EmbeddedLinux.md](sources/$Bootlin_EmbeddedLinux.md) — Bootlin 嵌入式 Linux 培训：交叉编译、U-Boot、内核配置、设备树、根文件系统、Buildroot/Yocto 对比
-
-## 实体 (@)
-
-- [@CortexA_Series.md](entities/@CortexA_Series.md) — Cortex-A 全系列型号汇总（A5~A72，big.LITTLE 异构）
-- [@CortexM_Series.md](entities/@CortexM_Series.md) — Cortex-M 全系列型号对比（M0/M3/M4/M7/M33 等），与 Cortex-A 核心区别
-
-## 概念 (#)
-
-- [#NumberSystems_Encoding.md](concepts/#NumberSystems_Encoding.md) — 数制转换（二/八/十六进制）、补码、IEEE 754 浮点数、ASCII/BCD/UTF-8 编码
-- [#DigitalLogic_Basics.md](concepts/#DigitalLogic_Basics.md) — 布尔代数、逻辑门、触发器（D/JK/T）、组合逻辑与时序逻辑、计数器
-- [#EmbeddedC_BitManipulation.md](concepts/#EmbeddedC_BitManipulation.md) — 位操作、volatile、MMIO、结构体对齐、中断安全编码
-- [#Endianness.md](concepts/#Endianness.md) — 大小端字节序、ARM 字节序支持、网络字节序转换
-- [#ComputerArchitecture_Basics.md](concepts/#ComputerArchitecture_Basics.md) — CPU流水线、AHB/APB总线、存储层次、哈佛/冯诺依曼结构、DMA
-- [#CortexA_ProcessorModes.md](concepts/#CortexA_ProcessorModes.md) — 处理器模式（USR/FIQ/IRQ/SVC/ABT/UND/SYS）、CPSR 标志位
-- [#ARM_InstructionSets.md](concepts/#ARM_InstructionSets.md) — ARM/Thumb/Thumb-2/NEON 指令集体系
-- [#MMU_VirtualMemory.md](concepts/#MMU_VirtualMemory.md) — MMU 页表结构、VA→PA 转换、内存类型与访问权限
-- [#NVIC.md](concepts/#NVIC.md) — 嵌套向量中断控制器，Cortex-M 中断机制，与 GIC 对比
-- [#MPU_CortexM.md](concepts/#MPU_CortexM.md) — MPU 内存保护单元，Cortex-M 区域保护，与 MMU 对比
-- [#JTAG_SWD_Debugging.md](concepts/#JTAG_SWD_Debugging.md) — JTAG/SWD 调试：CoreSight 架构、断点类型、OpenOCD+GDB 配置、STM32MP157 JTAG 接口
-
-## 综合 (!)
-
-- [!CortexA_vs_CortexM.md](synthesis/!CortexA_vs_CortexM.md) — Cortex-A 与 Cortex-M 全面对比：架构、功耗、选型、应用场景
-
 ## Q&A (?)
 
-暂无内容。
+- [SPI NOR Flash 读 JEDEC ID 全 0xFF](questions\SPI-NOR-Flash-读JEDEC-ID全FF.md)
 
 ---
 
-最后更新：2026-05-25
+最后更新：2026-05-30
