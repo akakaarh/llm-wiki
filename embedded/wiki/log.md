@@ -115,3 +115,10 @@
 - 标注资料缺口：阶段3(OpenOCD+GDB)、阶段5(FreeRTOS原理→已补充)、阶段7(ftrace/eBPF)、阶段8(Yocto→已补充/SecureBoot→部分补充)
 - 新增资料额外内容清单和待补充资料建议
 - qmd 索引更新：32文件、347向量块
+
+## [2026-05-30] question | 自动沉淀首条 Q&A（自动化验证）
+
+- 新建 ? Q&A：?SPI-NOR-Flash-读JEDEC-ID全FF.md
+- 触发方式：自动知识沉淀（CLAUDE.md 规则 + Stop hook 联合）
+- 内容：SPI NOR Flash probe 读 JEDEC ID 全 0xFF，根因是 CS 引脚未配 pinctrl
+- 更新 index.md

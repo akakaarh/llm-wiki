@@ -1,0 +1,72 @@
+[       4ms] [WARNING] Cookie s_vi is not registered with any cookie groups @ :3
+[       4ms] [WARNING] Cookie s_vi is not registered with any cookie groups @ :3
+[       4ms] [WARNING] Cookie bm_sz is not registered with any cookie groups @ :3
+[       5ms] [WARNING] Cookie bm_sz is not registered with any cookie groups @ :3
+[       5ms] [WARNING] Cookie bm_sv is not registered with any cookie groups @ :3
+[       5ms] [WARNING] Cookie bm_sv is not registered with any cookie groups @ :3
+[       5ms] [WARNING] Cookie _abck is not registered with any cookie groups @ :3
+[       5ms] [WARNING] Cookie _abck is not registered with any cookie groups @ :3
+[    4388ms] [WARNING] Error with Permissions-Policy header: Unrecognized feature: 'document-domain'. @ :0
+[    5433ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://c.go-mpulse.net/api/config.json?key=6LYNW-NX2GB-R7JSJ-V4BHQ-HVATR&d=wiki.st.com&t=5931989&v=1.792.60&sl=0&si=3a1ab953-330c-43e3-b60f-bc787e699579-tfixlq&plugins=AK,ConfigOverride,Continuity,PageParams,RT,PaintTiming,NavigationTiming,ResourceTiming,Memory,Akamai,EventTiming,BFCache,LOGN&acao=&ak.ai=1107307:0
+[    6530ms] [LOG] true dtmCookiesEnabled @ https://www.st.com/astatic/onetrust/wiki/OneTrust.js:231
+[    6530ms] [LOG] Loading DTM @ https://www.st.com/astatic/onetrust/wiki/OneTrust.js:240
+[    6535ms] [WARNING] Cookie TEST_AMCV_COOKIE_WRITE is not registered with any cookie groups @ :3
+[    6535ms] [WARNING] Cookie TEST_AMCV_COOKIE_WRITE is not registered with any cookie groups @ :3
+[    6535ms] [WARNING] Cookie TEST_AMCV_COOKIE_WRITE is not registered with any cookie groups @ :3
+[    6535ms] [WARNING] Cookie TEST_AMCV_COOKIE_WRITE is not registered with any cookie groups @ :3
+[    6536ms] [WARNING] Cookie TEST_AMCV_COOKIE_WRITE is not registered with any cookie groups @ :3
+[    6536ms] [WARNING] Cookie TEST_AMCV_COOKIE_WRITE is not registered with any cookie groups @ :3
+[    6536ms] [WARNING] Cookie AMCV_6C557FBB5417FB460A4C98A4%40AdobeOrg is not registered with any cookie groups @ :3
+[    6536ms] [WARNING] Cookie AMCV_6C557FBB5417FB460A4C98A4%40AdobeOrg is not registered with any cookie groups @ :3
+[    6536ms] [WARNING] Cookie AMCV_6C557FBB5417FB460A4C98A4%40AdobeOrg is not registered with any cookie groups @ :3
+[    6542ms] [WARNING] Use of "document.write" is deprecated. Use jQuery or mw.loader.load instead. @ :603
+[    6542ms] [WARNING] Use of "document.writeln" is deprecated. Use jQuery or mw.loader.load instead. @ :603
+[    6542ms] [WARNING] Use of "document.write" is deprecated. Use jQuery or mw.loader.load instead. @ :603
+[    6542ms] [WARNING] Use of "document.writeln" is deprecated. Use jQuery or mw.loader.load instead. @ :603
+[    6543ms] [WARNING] Use of "document.write" is deprecated. Use jQuery or mw.loader.load instead. @ :603
+[    6543ms] [WARNING] Use of "document.writeln" is deprecated. Use jQuery or mw.loader.load instead. @ :603
+[    6546ms] [WARNING] Cookie s_plt is not registered with any cookie groups @ :3
+[    6546ms] [WARNING] Cookie s_pltp is not registered with any cookie groups @ :3
+[    6546ms] [WARNING] Cookie gpv_Page is not registered with any cookie groups @ :3
+[    6547ms] [LOG] prop10: undefined @ https://assets.adobedtm.com/a86419113799/01b0e221c0d2/launch-2a820308696f.min.js:17
+[    6547ms] [LOG] setting eVar1-2 again @ https://assets.adobedtm.com/a86419113799/01b0e221c0d2/launch-2a820308696f.min.js:14
+[    6547ms] [WARNING] Cookie s_login is not registered with any cookie groups @ :3
+[    6788ms] [WARNING] Use of "document.write" is deprecated. Use jQuery or mw.loader.load instead. @ :603
+[    6789ms] [WARNING] Use of "document.writeln" is deprecated. Use jQuery or mw.loader.load instead. @ :603
+[    6789ms] [WARNING] Use of "document.write" is deprecated. Use jQuery or mw.loader.load instead. @ :603
+[    6789ms] [WARNING] Use of "document.writeln" is deprecated. Use jQuery or mw.loader.load instead. @ :603
+[    6789ms] [WARNING] Use of "document.write" is deprecated. Use jQuery or mw.loader.load instead. @ :603
+[    6789ms] [WARNING] Use of "document.writeln" is deprecated. Use jQuery or mw.loader.load instead. @ :603
+[    6791ms] [WARNING] Use of "document.write" is deprecated. Use jQuery or mw.loader.load instead. @ :603
+[    6791ms] [WARNING] Use of "document.writeln" is deprecated. Use jQuery or mw.loader.load instead. @ :603
+[    6875ms] [WARNING] Cookie mbox is not registered with any cookie groups @ :3
+[    6876ms] [WARNING] Cookie at_check is not registered with any cookie groups @ :3
+[    6876ms] [WARNING] Cookie at_check is not registered with any cookie groups @ :3
+[    6876ms] [WARNING] AT: [page-init] Adobe Target content delivery is disabled. Ensure that you can save cookies to your current domain, there is no "mboxDisable" cookie and there is no "mboxDisable" parameter in query string. @ https://assets.adobedtm.com/a86419113799/01b0e221c0d2/launch-2a820308696f.min.js:6
+[    7057ms] [WARNING] Cookie mdLogger is not registered with any cookie groups @ :3
+[    7059ms] [WARNING] MODAL_DIALOGS will be deprecated! Please, use in future KAMPYLE_ONSITE_SDK instead! @ https://resources.digital-cloud.medallia.eu/wdceu/6912/onsite/generic1778579135935.js:0
+[    7060ms] [WARNING] Cookie kampyleUserSession is not registered with any cookie groups @ :3
+[    7060ms] [WARNING] Cookie kampyleSessionPageCounter is not registered with any cookie groups @ :3
+[    7060ms] [WARNING] Cookie kampyleUserSessionsCount is not registered with any cookie groups @ :3
+[    7060ms] [WARNING] Cookie kampyleUserPercentile is not registered with any cookie groups @ :3
+[    7060ms] [WARNING] Cookie kampyleInvitePresented is not registered with any cookie groups @ :3
+[    7060ms] [WARNING] Cookie md_isSurveySubmittedInSession is not registered with any cookie groups @ :3
+[    7060ms] [WARNING] Cookie kampyleUserPercentile is not registered with any cookie groups @ :3
+[    7061ms] [WARNING] Cookie kampyleSessionPageCounter is not registered with any cookie groups @ :3
+[    8552ms] [INFO] Munchkin initialization has been missed @ :15
+[    8553ms] [LOG] *** Entered beacon rule custom code to send beacon, checking prev pagename @ https://assets.adobedtm.com/a86419113799/01b0e221c0d2/launch-2a820308696f.min.js:20
+[    8553ms] [WARNING] Cookie gpv_pn is not registered with any cookie groups @ :3
+[    8553ms] [LOG] *** Beacon rule custom code previous pageName=undefined @ https://assets.adobedtm.com/a86419113799/01b0e221c0d2/launch-2a820308696f.min.js:20
+[    8553ms] [LOG] *** Beacon rule function start @ https://assets.adobedtm.com/a86419113799/01b0e221c0d2/launch-2a820308696f.min.js:20
+[    8553ms] [LOG] *** Beacon rule function end @ https://assets.adobedtm.com/a86419113799/01b0e221c0d2/launch-2a820308696f.min.js:20
+[    8553ms] [LOG] *** Beacon rule: cookie deleted @ https://assets.adobedtm.com/a86419113799/01b0e221c0d2/launch-2a820308696f.min.js:20
+[    8554ms] [LOG] ***Data layer within beacon rule is :{"pageInstanceID":"STM32MPU_Distribution_Package:mock","page":{"is404":false,"pageInfo":{"isIframe":"No","contentIframe":"No","pageName":"STM32MPU_Distribution_Package - stm32mpu - EU","hierarchie1":"STM32MPU Distribution Package","hierarchie2":"","pageShortName":"STM32MPU Distribution Package","previous":{"pageShortName":""},"server":"https://wiki.st.com","destinationURL":"https://wiki.st.com/stm32mpu/wiki/STM32MP1_Distribution_Package","downloadURL":"","urlShortcut":"","breadCrumbs":"STM32MPU Distribution Package - stm32mpu - EU","referringURL":"","sysEnv":"web"},"category":{"error":"","type":"stm32mpu","primaryCategory":"Pages","version":"2026-05-24"},"attributes":{"language":"English","version":"2018-10-23"}},"version":"1.0","user":[{"profile":[{"profileInfo":{"profileID":0},"attributes":{"Logged":false}}]}],"language":"English","partnerkw":"","linkpos":"","lkid":"","lktit":"","linkfn":"","lkdest":""} @ :1
+[    8555ms] [LOG] Purging events @ :1
+[    8660ms] [WARNING] Cookie s_fid is not registered with any cookie groups @ :3
+[    8660ms] [WARNING] Cookie adbCl is not registered with any cookie groups @ :3
+[    8660ms] [WARNING] Cookie s_visit is not registered with any cookie groups @ :3
+[    8660ms] [WARNING] Cookie s_visit is not registered with any cookie groups @ :3
+[    8661ms] [WARNING] Cookie s_dl is not registered with any cookie groups @ :3
+[    8661ms] [WARNING] Cookie s_dl is not registered with any cookie groups @ :3
+[    8661ms] [WARNING] Cookie s_nr30 is not registered with any cookie groups @ :3
+[    8661ms] [WARNING] Cookie s_cc is not registered with any cookie groups @ :3

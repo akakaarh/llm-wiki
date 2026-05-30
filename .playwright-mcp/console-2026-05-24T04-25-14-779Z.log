@@ -1,0 +1,73 @@
+[       5ms] [WARNING] Cookie s_vi is not registered with any cookie groups @ :3
+[       5ms] [WARNING] Cookie s_vi is not registered with any cookie groups @ :3
+[       5ms] [WARNING] Cookie bm_sz is not registered with any cookie groups @ :3
+[       5ms] [WARNING] Cookie bm_sz is not registered with any cookie groups @ :3
+[       5ms] [WARNING] Cookie bm_sv is not registered with any cookie groups @ :3
+[       5ms] [WARNING] Cookie bm_sv is not registered with any cookie groups @ :3
+[       5ms] [WARNING] Cookie _abck is not registered with any cookie groups @ :3
+[       5ms] [WARNING] Cookie _abck is not registered with any cookie groups @ :3
+[    2511ms] [WARNING] Error with Permissions-Policy header: Unrecognized feature: 'document-domain'. @ :0
+[    3343ms] [LOG] true dtmCookiesEnabled @ https://www.st.com/astatic/onetrust/wiki/OneTrust.js:231
+[    3343ms] [LOG] Loading DTM @ https://www.st.com/astatic/onetrust/wiki/OneTrust.js:240
+[    3348ms] [WARNING] Cookie TEST_AMCV_COOKIE_WRITE is not registered with any cookie groups @ :3
+[    3348ms] [WARNING] Cookie TEST_AMCV_COOKIE_WRITE is not registered with any cookie groups @ :3
+[    3349ms] [WARNING] Cookie TEST_AMCV_COOKIE_WRITE is not registered with any cookie groups @ :3
+[    3349ms] [WARNING] Cookie TEST_AMCV_COOKIE_WRITE is not registered with any cookie groups @ :3
+[    3349ms] [WARNING] Cookie TEST_AMCV_COOKIE_WRITE is not registered with any cookie groups @ :3
+[    3349ms] [WARNING] Cookie TEST_AMCV_COOKIE_WRITE is not registered with any cookie groups @ :3
+[    3349ms] [WARNING] Cookie AMCV_6C557FBB5417FB460A4C98A4%40AdobeOrg is not registered with any cookie groups @ :3
+[    3349ms] [WARNING] Cookie AMCV_6C557FBB5417FB460A4C98A4%40AdobeOrg is not registered with any cookie groups @ :3
+[    3350ms] [WARNING] Cookie AMCV_6C557FBB5417FB460A4C98A4%40AdobeOrg is not registered with any cookie groups @ :3
+[    3356ms] [WARNING] Use of "document.write" is deprecated. Use jQuery or mw.loader.load instead. @ :758
+[    3357ms] [WARNING] Use of "document.writeln" is deprecated. Use jQuery or mw.loader.load instead. @ :758
+[    3357ms] [WARNING] Use of "document.write" is deprecated. Use jQuery or mw.loader.load instead. @ :758
+[    3357ms] [WARNING] Use of "document.writeln" is deprecated. Use jQuery or mw.loader.load instead. @ :758
+[    3357ms] [WARNING] Use of "document.write" is deprecated. Use jQuery or mw.loader.load instead. @ :758
+[    3357ms] [WARNING] Use of "document.writeln" is deprecated. Use jQuery or mw.loader.load instead. @ :758
+[    3361ms] [WARNING] Cookie s_plt is not registered with any cookie groups @ :3
+[    3361ms] [WARNING] Cookie s_pltp is not registered with any cookie groups @ :3
+[    3361ms] [WARNING] Cookie gpv_Page is not registered with any cookie groups @ :3
+[    3361ms] [LOG] prop10: undefined @ https://assets.adobedtm.com/a86419113799/01b0e221c0d2/launch-2a820308696f.min.js:17
+[    3361ms] [LOG] setting eVar1-2 again @ https://assets.adobedtm.com/a86419113799/01b0e221c0d2/launch-2a820308696f.min.js:14
+[    3362ms] [WARNING] Cookie s_login is not registered with any cookie groups @ :3
+[    3375ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://c.go-mpulse.net/api/config.json?key=6LYNW-NX2GB-R7JSJ-V4BHQ-HVATR&d=wiki.st.com&t=5931989&v=1.792.60&sl=0&si=9fcbf442-80cd-46ac-b0a5-e5a78c7d6796-tfixm3&plugins=AK,ConfigOverride,Continuity,PageParams,RT,PaintTiming,NavigationTiming,ResourceTiming,Memory,Akamai,EventTiming,BFCache,LOGN&acao=&ak.ai=1107307:0
+[    3605ms] [WARNING] Use of "document.write" is deprecated. Use jQuery or mw.loader.load instead. @ :758
+[    3605ms] [WARNING] Use of "document.writeln" is deprecated. Use jQuery or mw.loader.load instead. @ :758
+[    3605ms] [WARNING] Use of "document.write" is deprecated. Use jQuery or mw.loader.load instead. @ :758
+[    3605ms] [WARNING] Use of "document.writeln" is deprecated. Use jQuery or mw.loader.load instead. @ :758
+[    3605ms] [WARNING] Use of "document.write" is deprecated. Use jQuery or mw.loader.load instead. @ :758
+[    3605ms] [WARNING] Use of "document.writeln" is deprecated. Use jQuery or mw.loader.load instead. @ :758
+[    3607ms] [WARNING] Use of "document.write" is deprecated. Use jQuery or mw.loader.load instead. @ :758
+[    3607ms] [WARNING] Use of "document.writeln" is deprecated. Use jQuery or mw.loader.load instead. @ :758
+[    3694ms] [WARNING] Cookie mbox is not registered with any cookie groups @ :3
+[    3694ms] [WARNING] Cookie at_check is not registered with any cookie groups @ :3
+[    3695ms] [WARNING] Cookie at_check is not registered with any cookie groups @ :3
+[    3695ms] [WARNING] AT: [page-init] Adobe Target content delivery is disabled. Ensure that you can save cookies to your current domain, there is no "mboxDisable" cookie and there is no "mboxDisable" parameter in query string. @ https://assets.adobedtm.com/a86419113799/01b0e221c0d2/launch-2a820308696f.min.js:6
+[    3876ms] [WARNING] Cookie mdLogger is not registered with any cookie groups @ :3
+[    3879ms] [WARNING] MODAL_DIALOGS will be deprecated! Please, use in future KAMPYLE_ONSITE_SDK instead! @ https://resources.digital-cloud.medallia.eu/wdceu/6912/onsite/generic1778579135935.js:0
+[    3880ms] [WARNING] Cookie kampyleUserSession is not registered with any cookie groups @ :3
+[    3880ms] [WARNING] Cookie kampyleSessionPageCounter is not registered with any cookie groups @ :3
+[    3880ms] [WARNING] Cookie kampyleUserSessionsCount is not registered with any cookie groups @ :3
+[    3880ms] [WARNING] Cookie kampyleUserPercentile is not registered with any cookie groups @ :3
+[    3880ms] [WARNING] Cookie kampyleInvitePresented is not registered with any cookie groups @ :3
+[    3880ms] [WARNING] Cookie md_isSurveySubmittedInSession is not registered with any cookie groups @ :3
+[    3880ms] [WARNING] Cookie kampyleUserPercentile is not registered with any cookie groups @ :3
+[    3881ms] [WARNING] Cookie kampyleSessionPageCounter is not registered with any cookie groups @ :3
+[    5365ms] [INFO] Munchkin initialization has been missed @ :15
+[    5366ms] [LOG] *** Entered beacon rule custom code to send beacon, checking prev pagename @ https://assets.adobedtm.com/a86419113799/01b0e221c0d2/launch-2a820308696f.min.js:20
+[    5366ms] [WARNING] Cookie gpv_pn is not registered with any cookie groups @ :3
+[    5366ms] [LOG] *** Beacon rule custom code previous pageName=undefined @ https://assets.adobedtm.com/a86419113799/01b0e221c0d2/launch-2a820308696f.min.js:20
+[    5366ms] [LOG] *** Beacon rule function start @ https://assets.adobedtm.com/a86419113799/01b0e221c0d2/launch-2a820308696f.min.js:20
+[    5366ms] [LOG] *** Beacon rule function end @ https://assets.adobedtm.com/a86419113799/01b0e221c0d2/launch-2a820308696f.min.js:20
+[    5366ms] [LOG] *** Beacon rule: cookie deleted @ https://assets.adobedtm.com/a86419113799/01b0e221c0d2/launch-2a820308696f.min.js:20
+[    5368ms] [LOG] ***Data layer within beacon rule is :{"pageInstanceID":"How_to_create_a_new_open_embedded_layer:mock","page":{"is404":false,"pageInfo":{"isIframe":"No","contentIframe":"No","pageName":"How_to_create_a_new_open_embedded_layer - stm32mpu - EU","hierarchie1":"How to create a new open embedded layer","hierarchie2":"","pageShortName":"How to create a new open embedded layer","previous":{"pageShortName":""},"server":"https://wiki.st.com","destinationURL":"https://wiki.st.com/stm32mpu/wiki/How_to_create_a_new_open_embedded_layer","downloadURL":"","urlShortcut":"","breadCrumbs":"How to create a new open embedded layer - stm32mpu - EU","referringURL":"","sysEnv":"web"},"category":{"error":"","type":"stm32mpu","primaryCategory":"Pages","version":"2026-05-20"},"attributes":{"language":"English","version":"2018-10-23"}},"version":"1.0","user":[{"profile":[{"profileInfo":{"profileID":0},"attributes":{"Logged":false}}]}],"language":"English","partnerkw":"","linkpos":"","lkid":"","lktit":"","linkfn":"","lkdest":""} @ :1
+[    5368ms] [LOG] Purging events @ :1
+[    5476ms] [WARNING] Cookie s_fid is not registered with any cookie groups @ :3
+[    5477ms] [WARNING] Cookie adbCl is not registered with any cookie groups @ :3
+[    5477ms] [WARNING] Cookie s_visit is not registered with any cookie groups @ :3
+[    5477ms] [WARNING] Cookie s_visit is not registered with any cookie groups @ :3
+[    5477ms] [WARNING] Cookie s_dl is not registered with any cookie groups @ :3
+[    5477ms] [WARNING] Cookie s_dl is not registered with any cookie groups @ :3
+[    5477ms] [WARNING] Cookie s_nr30 is not registered with any cookie groups @ :3
+[    5477ms] [WARNING] Cookie s_cc is not registered with any cookie groups @ :3
+[   11429ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://connect.facebook.net/en_US/fbevents.js:0
