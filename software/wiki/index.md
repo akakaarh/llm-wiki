@@ -23,6 +23,10 @@
 
 暂无内容。
 
+## Dashboard
+
+- [Software Wiki Dashboard](dashboard.md)
+
 ---
 
-最后更新：2026-05-16
+最后更新：2026-05-30
