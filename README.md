@@ -53,4 +53,9 @@ python scripts/graph.py embedded --format json
 
 - 阶段 1（嵌入式基础）已完成
 - 阶段 2（ARM架构+RISC-V）已完成
-- 下一步：阶段 3（Cortex-M 深入 + JTAG/SWD），等待 STM32MP157 开发板到货
+- 阶段 3（Cortex-M 深入 + JTAG/SWD）理论已完成，实操进行中
+  - 3-P1 环境搭建 ✅
+  - 3-P2 M4 固件加载 ✅（remoteproc + WiFi SCP）
+  - 3-P3 GDB 调试 待开始
+- 阶段 4（Cortex-M 外设）4.1 GPIO 理论已完成，4.2 通信协议待开始
+- 下一步：3-P3 OpenOCD + GDB 调试 M4
