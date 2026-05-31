@@ -169,7 +169,7 @@
 | 练习 | 内容 | 验证标准 |
 |------|------|---------|
 | 3-P1 | 搭建开发环境：arm-none-eabi-gcc + STM32CubeMP1 SDK + OpenOCD ✅ | `arm-none-eabi-gcc --version` 正常输出 |
-| 3-P2 | 第一个M4裸机程序：编译main.c，通过remoteproc加载到M4运行 | 串口/LED有输出 |
+| 3-P2 | 第一个M4裸机程序：编译main.c，通过remoteproc加载到M4运行 ✅ | 蜂鸣器闪烁（PC7） |
 | 3-P3 | JTAG调试：OpenOCD+ST-Link连接M4，GDB设断点、单步、查看寄存器 | `info registers` 看到R0-R15/CPSR |
 | 3-P4 | 异常触发实验：主动触发HardFault，GDB中观察入栈帧 | 能看到异常压栈的8个寄存器值 |
 | 3-P5 | SysTick实验：配置SysTick中断，LED每秒闪烁 | LED精确1秒周期闪烁 |
