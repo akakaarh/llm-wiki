@@ -1,0 +1,31 @@
+---
+type: question
+tags: [stm32mp157, gpio, address, register, debug]
+created: 2026-05-31
+---
+
+# STM32MP157 GPIO 基地址计算错误
+
+**现象：** M4 程序配置 GPIO 但引脚无反应，读回寄存器值为默认值。
+
+**原因：** GPIO 基地址计算错误。STM32MP157 的 GPIO 地址不是简单的 GPIOA + N*0x400。
+
+**正确地址（从 SDK 头文件查）：**
+```
+PERIPH_BASE      = 0x40000000
+AHB4_PERIPH_BASE = PERIPH_BASE + 0x10000000 = 0x50000000
+
+GPIOA_BASE = AHB4_PERIPH_BASE + 0x2000 = 0x50002000
+GPIOB_BASE = AHB4_PERIPH_BASE + 0x3000 = 0x50003000
+GPIOC_BASE = AHB4_PERIPH_BASE + 0x4000 = 0x50004000
+GPIOD_BASE = AHB4_PERIPH_BASE + 0x5000 = 0x50005000
+GPIOE_BASE = AHB4_PERIPH_BASE + 0x6000 = 0x50006000
+GPIOF_BASE = AHB4_PERIPH_BASE + 0x7000 = 0x50007000
+GPIOG_BASE = AHB4_PERIPH_BASE + 0x8000 = 0x50008000
+GPIOH_BASE = AHB4_PERIPH_BASE + 0x9000 = 0x50009000
+GPIOI_BASE = AHB4_PERIPH_BASE + 0xA000 = 0x5000A000
+```
+
+**修复：** 查 SDK 头文件 `stm32mp157dxx_cm4.h`，不要凭记忆计算。
+
+**验证方法：** 用 `devmem2` 从 Linux 读寄存器，对比预期值。

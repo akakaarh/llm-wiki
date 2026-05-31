@@ -63,7 +63,7 @@
 状态：已完成
 
 **阶段 3：Cortex-M架构深入 + JTAG/SWD**
-状态：进行中（3.1~3.5 理论已完成，3-P1 环境搭建已完成，3-P2 待开始）
+状态：进行中（3.1~3.5 理论已完成，3-P1 环境搭建已完成，3-P2 已完成，3-P3 待开始）
 
 **阶段 4：Cortex-M外设与驱动**
 状态：进行中（4.1 GPIO 理论全部讲完，4.2 通信协议待开始）
@@ -434,6 +434,7 @@
 | 2026-05-24 | 阶段4.1部分 | 4.1.1~4.1.6 理论讲完（GPIO基础/输出/输入/AF/矩阵键盘/EXTI），4.1.7~4.1.8 待继续；实操待 ST-LINK 到货 |
 | 2026-05-25 | 阶段4.1完成 | 4.1.7中断编程实践（按键中断LED翻转/多中断配置/volatile/中断安全写法）、4.1.8 GPIO实际应用（状态机LED/Bit-banging/唤醒/驱动外部电路）；4.1 GPIO全部8节理论讲完 |
 | 2026-05-29 | 3-P1完成 | DAP调试器调通（ATK-FS-HID-CMSIS-DAP，需原生HID驱动）；OpenOCD+CMSIS-DAP+SWD成功连接STM32MP157（检测到A7×2+M4）；下载STM32CubeMP1 SDK；讲解工程文件结构/启动文件/链接脚本/交叉编译/Makefile；创建lab/02-first-m4（Makefile+startup.s+system_stm32mp1xx.c+main.c），编译成功 |
+| 2026-05-31 | 3-P2完成 | M4固件加载成功（remoteproc + SCP over WiFi）；调试GPIO冲突问题：PI0/PF3被Linux LED子系统控制，M4无法独占；改用PC7蜂鸣器成功；GPIO基地址需从SDK头文件查（GPIOC=0x50004000，GPIOF=0x50007000）；沉淀Q&A 2篇+概念页1篇 |
 
 ---
 

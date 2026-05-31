@@ -34,6 +34,7 @@
 - [嵌入式C语言](concepts\#EmbeddedC_BitManipulation.md)
 - [大小端（Endianness）](concepts\#Endianness.md)
 - [JTAG/SWD 调试基础](concepts\#JTAG_SWD_Debugging.md)
+- [M4 固件加载流程](concepts\M4_Firmware_Loading.md)
 - [MMU 与虚拟内存](concepts\#MMU_VirtualMemory.md)
 - [MPU — 内存保护单元（Cortex-M）](concepts\#MPU_CortexM.md)
 - [数制与编码](concepts\#NumberSystems_Encoding.md)
@@ -45,11 +46,17 @@
 
 ## 学习笔记
 
-暂无内容。
+- [gpiod_to_irq 完整调用链分析](notes\gpiod-to-irq-call-chain.md)
+
+## Dashboard
+
+- [Wiki Dashboard](dashboard.md)
 
 ## Q&A (?)
 
+- [M4 GPIO 与 Linux LED 驱动冲突](questions\M4-GPIO-Linux冲突.md)
 - [SPI NOR Flash 读 JEDEC ID 全 0xFF](questions\SPI-NOR-Flash-读JEDEC-ID全FF.md)
+- [STM32MP157 GPIO 基地址计算错误](questions\STM32MP157-GPIO基地址.md)
 
 ---
 
