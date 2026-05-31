@@ -1,3 +1,32 @@
+# Obsidian
 .obsidian/
+
+# Claude Code 工具状态
+.claude/
+**/.claude/
+
+# 浏览器自动化日志
+.playwright-mcp/
+
+# MCP 配置（含本地路径）
+.mcp.json
+
+# 生成文件
+*.db
+*.pyc
+__pycache__/
+
+# 编译产物
+*.exe
+*.bin
+*.chm
+
+# 第三方二进制
+tools/ctags_bin/
+
+# kernel-index（使用独立仓库 github.com/akakaarh/kernel-code-index）
+tools/kernel-index/
+
+# 原始文档（PDF、厂商 SDK）
 embedded/raw/
 software/raw/

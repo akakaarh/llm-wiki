@@ -2,8 +2,8 @@
 
 ## Vaults
 
-- `E:\Wiki\embedded\wiki\` — 嵌入式开发知识库
-- `E:\Wiki\software\wiki\` — 软件开发知识库（尚未建立）
+- `embedded/wiki/` — 嵌入式开发知识库
+- `software/wiki/` — 软件开发知识库
 
 ## 查询行为规范
 
@@ -18,15 +18,9 @@
 3. 如需深入，读取对应 vault 的 `wiki/index.md` 或原始 markdown
 4. 只有 wiki 和 qmd 都找不到答案时，才上网搜索
 
-当用户问题涉及软件开发主题时，操作同上（software vault 待建立）。
-
-## qmd 服务
-
-- 地址：`localhost:3737`
-- embedded collection：`E:/Wiki/embedded/wiki/`
-- software collection：`E:/Wiki/software/wiki/`（待建立）
+当用户问题涉及软件开发主题时，操作同上。
 
 ## 索引入口
 
-- `E:\Wiki\embedded\wiki\index.md`
-- `E:\Wiki\software\wiki\index.md`（待建立）
+- `embedded/wiki/index.md`
+- `software/wiki/index.md`
