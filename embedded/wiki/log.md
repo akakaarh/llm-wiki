@@ -122,3 +122,10 @@
 - 触发方式：自动知识沉淀（CLAUDE.md 规则 + Stop hook 联合）
 - 内容：SPI NOR Flash probe 读 JEDEC ID 全 0xFF，根因是 CS 引脚未配 pinctrl
 - 更新 index.md
+
+## [2026-05-31] notes | gpiod_to_irq 完整调用链分析
+
+- 新建 notes：gpiod-to-irq-call-chain.md
+- 内容：GPIO→IRQ 映射完整路径，含初始化（gpiochip_add_irqchip → irqdomain 创建）和运行时（gpiod_to_irq → irq_find_mapping）两条链路
+- 工具：kernel-index MCP（find_symbol + call_graph）
+- 更新 index.md

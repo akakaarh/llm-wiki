@@ -34,11 +34,16 @@
 - [嵌入式C语言](concepts\#EmbeddedC_BitManipulation.md)
 - [大小端（Endianness）](concepts\#Endianness.md)
 - [JTAG/SWD 调试基础](concepts\#JTAG_SWD_Debugging.md)
-- [M4 固件加载流程](concepts\M4_Firmware_Loading.md)
 - [MMU 与虚拟内存](concepts\#MMU_VirtualMemory.md)
 - [MPU — 内存保护单元（Cortex-M）](concepts\#MPU_CortexM.md)
 - [数制与编码](concepts\#NumberSystems_Encoding.md)
 - [NVIC — 嵌套向量中断控制器](concepts\#NVIC.md)
+- [M4 固件加载流程（STM32MP157）](concepts\M4_Firmware_Loading.md)
+- [SVD 外设寄存器解码](concepts\SVD_Peripheral_Decoding.md)
+
+## Dashboard
+
+- [Wiki Dashboard](dashboard.md)
 
 ## 综合 (!)
 
@@ -46,11 +51,7 @@
 
 ## 学习笔记
 
-- [gpiod_to_irq 完整调用链分析](notes\gpiod-to-irq-call-chain.md)
-
-## Dashboard
-
-- [Wiki Dashboard](dashboard.md)
+- [gpiod-to-irq-call-chain](notes\gpiod-to-irq-call-chain.md)
 
 ## Q&A (?)
 
@@ -60,4 +61,4 @@
 
 ---
 
-最后更新：2026-05-30
+最后更新：2026-06-02
